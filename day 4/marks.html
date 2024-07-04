@@ -1,0 +1,82 @@
+
+<html lang="en">
+
+<body>
+    <h1>Grade Calculator</h1>
+    <form id="marksForm"> 
+        <label for="subject1">Subject 1 Marks:</label>
+        <input type="number" id="subject1" required><br>
+
+        <label for="subject2">Subject 2 Marks:</label>
+        <input type="number" id="subject2" required><br>
+
+        <label for="subject3">Subject 3 Marks:</label>
+        <input type="number" id="subject3" required><br>
+
+        <label for="subject4">Subject 4 Marks:</label>
+        <input type="number" id="subject4" required><br>
+
+        <label for="subject5">Subject 5 Marks:</label>
+        <input type="number" id="subject5" required><br><br>
+
+        <button type="button" onclick="calculateGradeIfElse()">Calculate Grade using (if-else)</button>
+        <button type="button" onclick="calculateGradeSwitch()">Calculate Grade using (switch)</button>
+    </form>
+
+    <script>
+        function calculateGradeIfElse() {
+            const marks = [
+                parseInt(document.getElementById('subject1').value),
+                parseInt(document.getElementById('subject2').value),
+                parseInt(document.getElementById('subject3').value),
+                parseInt(document.getElementById('subject4').value),
+                parseInt(document.getElementById('subject5').value)
+            ];
+            
+            const total = marks.reduce((acc, curr) => acc + curr, 0);
+
+            if (total > 450) {
+                alert("You scored grade A—Congratulations.");
+            } else if (total > 300 && total <= 450) {
+                alert("You scored grade B—Good Job.");
+            } else if (total > 250 && total <= 300) {
+                alert("You scored grade C—You can do better.");
+            } else {
+                alert("Need to Work Hard.");
+            }
+        }
+
+        function calculateGradeSwitch() {
+            const marks = [
+                parseInt(document.getElementById('subject1').value),
+                parseInt(document.getElementById('subject2').value),
+                parseInt(document.getElementById('subject3').value),
+                parseInt(document.getElementById('subject4').value),
+                parseInt(document.getElementById('subject5').value)
+            ];
+            
+            const total = marks.reduce((acc, curr) => acc + curr, 0);
+
+            let gradeMessage;
+
+            switch (true) {
+                case (total > 450):
+                    gradeMessage = "You scored grade A—Congratulations.";
+                    break;
+                case (total > 300 && total <= 450):
+                    gradeMessage = "You scored grade B—Good Job.";
+                    break;
+                case (total > 250 && total <= 300):
+                    gradeMessage = "You scored grade C—You can do better.";
+                    break;
+                default:
+                    gradeMessage = "Need to Work Hard.";
+            }
+
+            alert(gradeMessage);
+        }
+    </script>
+</body>
+</html>
+
+            
