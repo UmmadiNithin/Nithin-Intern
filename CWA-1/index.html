@@ -1,0 +1,68 @@
+<html>
+<head>
+    
+    <title>Cows and Bulls Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(157, 244, 70);
+        }
+        input[type="text"] {
+            width: 100px;
+            padding: 5px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 5px 10px;
+        }
+        h1{
+            background-color: black;
+            text-align: center;
+            color: aliceblue;
+
+        }
+        p {
+            text-align: center;
+           
+        }
+        .marq{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            height: 20px;
+
+            
+            
+        }
+        .imagecow{
+            height: 200px;
+            width: 300px;
+            float: right;
+        }
+        .imagebull{
+            height: 200px;
+            width: 300px;
+            float: left;
+        }
+        .form{
+            text-align: center;
+        }
+       
+    </style>
+</head>
+<body>
+    <h1><--- Cows and Bulls Game ---></h1>
+    <p>I have generated a secret 4-digit number with unique digits. Try to guess it!</p>
+    <form class="form" id="guessForm">
+        <input type="number" id="guessInput" maxlength="4" placeholder="Enter guess" required>
+        <button type="submit">Submit Guess</button>
+        
+    </form>
+    <img class="imagebull" src="https://i.pinimg.com/originals/e3/b4/29/e3b429e7b4aedeb44aa1b40954681dc8.gif"</img>
+    <img  class="imagecow" src="https://i.gifer.com/Za9e.gif"</img>
+    <marquee  class="marq" bgcolor="yellow" direction="right">WELCOME TO BULLS & COWS GAME </marquee>
+    <div id="gameStatus"></div>
+    <div id="results"></div>
+    <script src="cowsandbulls.js"></script>
+</body>
+</html>
