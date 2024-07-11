@@ -1,0 +1,46 @@
+<html>
+
+<body>
+    
+    <h1>go and check in the console !</h1>
+
+    <script>
+
+class employee{
+
+constructor(Name, Year_of_joining,salary, Address )
+{
+this.Name = Name;
+this.Year_of_joining = Year_of_joining;
+this.salary = salary;
+this.Address = Address;
+
+}
+
+
+ employee_details()
+{
+ console.log(this.Name + "  "  + "     " + this.Year_of_joining + "           " + this.Address)
+
+    
+}
+
+
+}
+let Nithin =new employee('Nithin', 2024 , 16000 , 'pdtr')
+let farooq =new employee('farooq', 2024 , 26000 , "karamadai")
+let Deepak =new employee('Deepak', 2024 , 30000 , "karamadai")
+let pavan =new employee('pavan', 2024 , 28000 , "karamadai")
+
+console.log('Name' + "    " + "Year of Joining"+ "   " + " Address")
+Nithin.employee_details()
+farooq.employee_details()
+Deepak.employee_details()
+pavan.employee_details()
+
+
+
+
+    </script>
+</body>
+</html>
