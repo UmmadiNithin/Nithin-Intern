@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <input placeholder="enter your input" id="input" >
+        <button type="button" onclick="input()" >check</button>
+        <div id="output"></div>
+        <script> 
+            const input = () => {
+                let input = document.getElementById('input').value;
+                let output = document.getElementById('output');
+
+                if (!isNaN(input) && input.trim() !== "") {
+                    output.innerHTML = "<p>The given input is a number</p>";
+                } else {
+                    output.innerHTML = "<p>The given input is a string</p>";
+                }
+            }
+        </script>
+    </body>
+</html>
