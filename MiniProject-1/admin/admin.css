@@ -63,67 +63,23 @@ button:hover {
 
 
 
-/* card css */
 
 
-#product-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px; /* Adjust the space between cards */
-    padding: 16px;
-    justify-content: center; /* Center the cards horizontally */
-}
-
-/* Style for individual product cards */
-.product-card {
-    border: 1px solid #ddd; /* Border color */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    overflow: hidden; /* Hide overflow content */
-    width: 300px; /* Fixed width */
-    text-align: center; /* Center-align text */
-    background-color: #fff; /* Card background color */
-}
-
-/* Style for product images */
-.product-image {
-    width: 100%; /* Full width of the card */
-    height: auto; /* Maintain aspect ratio */
-    border-bottom: 1px solid #ddd; /* Border below image */
-}
-
-/* Style for product names */
-.product-card h3 {
-    font-size: 1.2em; /* Font size for the product name */
-    margin: 16px 0 8px; /* Margin above and below the name */
-}
-
-/* Style for product descriptions and prices */
-.product-card p {
-    margin: 0 0 8px; /* Margin below each paragraph */
-    color: #555; /* Text color for description and price */
-}
-
-
-
-
-
-
-
-
-
-/* General container styling */
-.container {
+ /* General container styling */
+ .AdminContainer {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     box-sizing: border-box; 
-   
-}
+    
+  
+} 
 
 /* Form styling */
 form {
     margin-bottom: 20px; 
+    width: 100%;
+    
 }
 
 .input-group {
@@ -149,32 +105,81 @@ button:hover {
     background-color: #0056b3;
 }
 
-/* Product container styling */
+
+
+
+/*  admin Product container styling */
+
+.DymaniContainer{
+height: 1px;
+}
+
+
+
+
+
+
+
+
+/* card styling  */
+
+
+/* Container for product cards */
 #product-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
-    margin-top: 20px; 
-}
-
-/* Product card styling */
-.product-card {
-    flex: 1 1 calc(33.333% - 20px); 
-    box-sizing: border-box; 
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
+    gap: 20px; 
+    padding: 16px;
+    justify-content: center;
     background-color: #fff; 
+    margin-top: 20px;
 }
 
-/* Product image styling */
-.product-image {
-    max-width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+
+ .product-card {
+    border: 1px solid #ddd; 
+    border-radius: 10px;
+    box-shadow: 0 2px 4px #0707071a; 
+    overflow: hidden; 
+    width: 300px; 
+    text-align: center; 
+    background-color: #e0dddd; 
+    
+    height: fit-content;
+} 
+
+.edit-btn{
+    background-color: rgb(219, 67, 67);
 }
+
+
+.product-image {
+    width: 50%; 
+    height: 50%; 
+   padding: 10px;
+   
+}
+
+
+.product-card h3 {
+    font-size: 1.2em; 
+    margin: 16px 0 8px; 
+}
+
+
+.product-card p {
+    margin: 0 0 8px;
+    color: #555; 
+    
+}
+
+.edit-btn{
+    margin-bottom: 5px !important
+}
+
+
+
+
 
 
 

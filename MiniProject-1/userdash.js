@@ -17,6 +17,8 @@ async function fetchProducts() {
     }
 }
 
+
+
 function displayProducts(products) {
     const container = document.getElementById('product-container');
     container.innerHTML = '';
@@ -26,23 +28,32 @@ function displayProducts(products) {
             const product = products[key];
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
+            productCard.setAttribute('data-key', key); 
 
             productCard.innerHTML = `
                 <img src="${product.url}" alt="${product.Product_Name}" class="product-image"/>
                 <h3>${product.Product_Name}</h3>
                 <p>${product.Product_Description}</p>
-                <p>$${product.Product_Price}</p>
-                
+                <p>Rs.${product.Product_Price}</p>
+                <button class="add-to-cart-btn">Add to Cart</button>
             `;
+
+            
+            productCard.querySelector('.add-to-cart-btn').addEventListener('click', () => {
+                addToCart(); 
+            });
 
             container.appendChild(productCard);
         }
     }
 }
 
+window.onload = fetchProducts();
+ 
 
-// Call fetchProducts when the page loads
-window.onload = fetchProducts;
 
-
+function addToCart() {
+    alert('you need to login !')
+    window.location.href='file:///C:/Intern/Nithin-Intern/MiniProject-1/login.html' 
+ }
 
