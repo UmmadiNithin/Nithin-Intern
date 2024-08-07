@@ -41,6 +41,9 @@ function displayProducts(products) {
                 <i class="fa fa-star></i>
                 </div>
             `;
+            productCard.addEventListener('click', () => {
+                window.location.href = `/MiniProject-1/order.html?product=${key}`;
+            });
 
             container.appendChild(productCard);
         }
