@@ -1,195 +1,163 @@
-
-//admin page  add item code
-
 document.getElementById('Admin-Form').addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const Product_Name = document.getElementById('Product-Name').value;
-    const Product_Description = document.getElementById('Product-Description').value;
-    const Product_Price = document.getElementById('Product-Price').value;
-    const Product_Image = document.getElementById('product-image').dataset.url; 
-   
+    const productIdElement = document.getElementById('productId');
+    const productId = productIdElement ? productIdElement.value : null;
+    const productName = document.getElementById('Product-Name').value;
+    const price = document.getElementById('Product-Price').value;
+    const productDescription = document.getElementById('Product-Description').value;
+    const upload_image = document.getElementById('product-image').dataset.url;
+
+    if (productName === '' || price === '' || productDescription === '') {
+      
+        alert('Please fill in all fields.');
+        return false;
+    }
+
+    if (!upload_image) {
+        alert('Please upload a file.');
+        return;
+    }
 
     try {
-        const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data.json`;
+        let productURL = 'https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data.json';
+        let method = 'POST';
 
-        const productResponse = await fetch(productURL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+        if (productId) {
+            productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
+            method = 'PUT';
+        }
+        const response = await fetch(productURL, {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                url: Product_Image,
-                Product_Name,
-                Product_Description,
-                Product_Price
+                url: upload_image,
+                Product_Description: productDescription,
+                Product_Name: productName,
+                Product_Price: price
             })
         });
 
-        if (productResponse.ok) {
-            alert('Product successfully saved!');
+        if (response.ok) {
+            alert(productId ? 'Product updated successfully' : 'Product added successfully');
+            document.getElementById('Admin-Form').reset();
             fetchProducts();
         } else {
-            alert('Error saving product.');
+            alert('Error occurred while adding/updating the product');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('Error saving product.');
+        alert('Error saving product');
     }
 });
 
-
-// image getfile function for uploading image 
-
+// Upload image
 function getFile(event) {
-    
     const file = event.target.files[0];
-    
+
     if (file) {
-        
         const reader = new FileReader();
-        
-        reader.onloadend = function() {
+
+        reader.onloadend = function () {
             document.getElementById('product-image').dataset.url = reader.result;
         };
-        
+
         reader.readAsDataURL(file);
     }
 }
+document.getElementById('product-image').addEventListener('change', getFile);
 
-
-
-
+// Fetch products
 async function fetchProducts() {
     try {
-        const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data.json`;
+        const productURL = 'https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data.json';
         const response = await fetch(productURL);
 
         if (!response.ok) {
-            throw new Error('Failed to fetch products');
+            throw new Error('Fetching Failed');
         }
 
         const products = await response.json();
         displayProducts(products);
     } catch (error) {
         console.error('Error fetching products:', error);
-        alert('Error fetching products.');
-    }
-}
-//to delete product items 
-async function deleteProduct(productKey) {
-    try {
-        const deleteURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productKey}.json`;
-        const response = await fetch(deleteURL, {
-            method: 'DELETE'
-        });
-
-        if (response.ok) {
-            alert('Product successfully deleted!');
-            fetchProducts(); 
-        } else {
-            alert('Error deleting product.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Error deleting product.');
+        alert('Failed to fetch products');
     }
 }
 
-// to edit product details in admin 
-
-async function editProduct(productKey) {
-    
-    try {
-        const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productKey}.json`;
-        const response = await fetch(productURL);
-        const product = await response.json();
-      
-        const newName = prompt('Enter new product name:', product.Product_Name);
-        const newDescription = prompt('Enter new product description:', product.Product_Description);
-        const newPrice = prompt('Enter new product price:', product.Product_Price);
-        const newImage = prompt('Enter new image URL (or leave empty to keep current):', product.url);
-
-        if (!newName || !newDescription || !newPrice) {
-            alert('Please provide all product details.');
-            return;
-        }
-
-        
-        try {
-            const updateURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productKey}.json`;
-            const response = await fetch(updateURL, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Product_Name: newName,
-                    Product_Description: newDescription,
-                    Product_Price: newPrice,
-                    url: newImage || product.url // Use new image if provided, otherwise keep current
-                })
-            });
-
-            if (response.ok) {
-                alert('Product successfully updated!');
-                fetchProducts(); 
-            } else {
-                alert('Error updating product.');
-            }
-        } catch (error) {
-            console.error('Error updating product:', error);
-            alert('Error updating product.');
-        }
-    } catch (error) {
-        console.error('Error fetching product:', error);
-        alert('Error fetching product details.');
-    }
-}
-
-//  to display product items in admin 
-
+// Display products
 function displayProducts(products) {
-    const container = document.getElementById('product-container');
-    container.innerHTML = '';
+    const AdminContainer = document.getElementById('product-container');
+    AdminContainer.innerHTML = '';
 
     for (const key in products) {
         if (products.hasOwnProperty(key)) {
             const product = products[key];
-            const productCard = document.createElement('div');
-            productCard.className = 'product-card';
-            productCard.setAttribute('data-key', key); 
 
+            const productCard = document.createElement('div');
+            productCard.className = 'productCard';
+            // productCard.setAttribute('data-key', key); 
             productCard.innerHTML = `
-                <div class="product-image-container">
-                    <img src="${product.url}" alt="${product.Product_Name}" class="product-image"/>
+                <img src="${product.url}" alt="${product.Product_Name}">
+                <div class="des">
+                    <h3>${product.Product_Name}</h3>
+                    <p>${product.Product_Description}</p>
+                    <div class="star">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4>Rs ${product.Product_Price}</h4>
+                    <button onclick="editProduct('${key}')" id="edit">Edit</button>
+                    <button onclick="deleteProduct('${key}')" id="delete">Delete</button>
                 </div>
-                <h3>${product.Product_Name}</h3>
-                <p>${product.Product_Description}</p>
-                <p>Rs.${product.Product_Price}</p>
-                <button class="edit-btn">Edit</button>
-                <button class="delete-btn">Delete</button>
             `;
 
-            // Add event listener for delete button
-            productCard.querySelector('.delete-btn').addEventListener('click', async () => {
-                const productKey = productCard.getAttribute('data-key');
-                await deleteProduct(productKey);
-            });
-
-            // Add event listener for edit button
-            productCard.querySelector('.edit-btn').addEventListener('click', () => {
-                const productKey = productCard.getAttribute('data-key');
-                editProduct(productKey);
-            });
-
-            container.appendChild(productCard);
+            AdminContainer.appendChild(productCard);
         }
     }
 }
 
+// Edit product
+window.editProduct = function(productId) {
+    const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
 
+    fetch(productURL)
+        .then(response => response.json())
+        .then(product => {
+            document.getElementById('productId').value = productId;
+            document.getElementById('Product-Name').value = product.Product_Name;
+            document.getElementById('Product-Description').value = product.Product_Description;
+            document.getElementById('Product-Price').value = product.Product_Price;
+            document.getElementById('product-image').dataset.url = product.url;
+            document.getElementById('Admin-Form').style.display = 'block';
+        })
+        .catch(error => console.error('Error fetching product:', error));
+}
 
-// Call fetchProducts when the page loads
-window.onload = fetchProducts();
+// Delete product
+async function deleteProduct(productId) {
+    if (confirm('Are you sure you want to delete this product?')) {
+        try {
+            const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
+            const response = await fetch(productURL, {
+                method: 'DELETE'
+            });
 
+            if (response.ok) {
+                alert('Product deleted successfully');
+                fetchProducts();
+            } else {
+                alert('Error occurred while deleting the product');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error deleting product');
+        }
+    }
+}
+
+// Load products on page load
+window.onload = fetchProducts;

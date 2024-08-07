@@ -8,49 +8,49 @@
 
 <body>
 
-    <div class="container">
-        <header>
+    <section id="header">
+        <a href="#"><img src="/MiniProject-1/images/nithin.png" class="logo" alt="" style="height: 60px; width: 70px; margin-right: 100;margin-bottom: 30;"></a>
+    
+        <div>   
+            <ul id="navbar">
+                <li id="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" name="search" placeholder="Search...">
+                        <button type="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
+                </li>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li id="lg-bag"><a href="../shop/cart.html"><i class="fa-solid fa-bag-shopping" ></i></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="/MiniProject-1/login.html" id="login-link">Login</a>
+                        <a href="/MiniProject-1/signup.html" id="signup-link">Signup</a>
+                        <h3 id="user-email"></h3>
+                        <a  id="logout-link" style="display: none;">logout</a>
+
+                      
+    
+                    </div>
+                </li>
             
-                <h1 class="h1"><span  style="color: rgb(239, 58, 61); font-size: 50px;">N</span> cart</h1>
-              
-            <div>
-                <b> 
-                    <pre style="font-size: x-large; color: rgb(53, 45, 45);font-family: 'Times New Roman', Times, serif;  ">      <span style="color: orange;">                                 GREAT  FREEDOM </span><span style="color: rgb(173, 166, 166);"> FESTIVAL IS</span>
-                    <span  style="color: green; font-size: 50px;">                    COMMING SOON !         </span>
-                     </pre> </b>
-            </div>
-        
-            <div class="loginpage">
-                <a href="file:///C:/Intern/Nithin-Intern/MiniProject-1/login.html">Login</a>
-            </div>
-            <div class="profile">
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"/>
-                  </svg>
-            </div>
-            <div id="icon-cart" class="cart-icon">
-                <a href="#" class="cart-icon"><i class="fas fa-shopping-cart"></i> Cart</a>
-            </div>
-           
-
-        </header>
-    </div>
-
-    <div class="cartTab">
-        <h1>Shopping Cart</h1>
-        <div class="ListCart">
-            show item here
+            </ul>
         </div>
-        <div class="btn">
-            <button class="close">Close</button>
-            <button class="checkout">Check out</button>
-        </div>
-    </div>
-    <marquee >WELCOME  TO  <span style="color: rgb(3, 13, 19); font-size: x-large;">  N</span> CART</marquee>
+    
+    </section>
 
+<section id="banner">
+    <div class="image-section">
+        <!-- Image to be displayed -->
+    </div>
+   
+   
+</section>
+
+   
+    
     <!-- this is cards div -->
-    <div  id="product-container"></div>
+    <div id="product-container"></div>
 
     <!-- Footer Section -->
     <footer class="footer">
@@ -58,7 +58,8 @@
             <!-- About Us Section -->
             <div class="footer-section about-us">
                 <h2>About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
             </div>
 
             <!-- Help Section -->
@@ -75,10 +76,13 @@
             <div class="footer-section social-media">
                 <h2>Follow Us</h2>
                 <div class="social-icons">
-                    <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i
+                            class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i
+                            class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i
+                            class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
@@ -93,9 +97,10 @@
         </div>
     </footer>
 
-    
-    <script src="userdash.js" ></script>
-    <script src="cart.js" ></script>
+
+    <script src="userdash.js"></script>
+    <script src="UiHeader.js"></script>
+   
 </body>
 
 </html>

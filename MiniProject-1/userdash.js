@@ -7,7 +7,7 @@ async function fetchProducts() {
 
         if (!response.ok) {
             throw new Error('Failed to fetch products');
-        }
+    }
 
         const products = await response.json();
         displayProducts(products);
@@ -33,20 +33,20 @@ function displayProducts(products) {
             productCard.innerHTML = `
                 <img src="${product.url}" alt="${product.Product_Name}" class="product-image"/>
                 <h3>${product.Product_Name}</h3>
-                <p>${product.Product_Description}</p>
                 <p>Rs.${product.Product_Price}</p>
-                <button class="add-to-cart-btn">Add to Cart</button>
+                <div class="stars">
+                <i class="fa fa-star></i>
+                <i class="fa fa-star></i>
+                <i class="fa fa-star></i>
+                <i class="fa fa-star></i>
+                </div>
             `;
-
-            
-            productCard.querySelector('.add-to-cart-btn').addEventListener('click', () => {
-                addToCart(); 
-            });
 
             container.appendChild(productCard);
         }
     }
 }
+
 
 window.onload = fetchProducts();
  
@@ -57,3 +57,6 @@ function addToCart() {
     window.location.href='file:///C:/Intern/Nithin-Intern/MiniProject-1/login.html' 
  }
 
+ function getUserEmail() {
+    return localStorage.getItem('userEmail') || 'No email available';
+}
