@@ -1,85 +1,86 @@
-/* Reset default margins and paddings, and ensure full height and width */
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     width: 100%;
-    font-family: Arial, sans-serif; /* Set a default font */
+    font-family: Arial, sans-serif; 
 }
 
 /* Header styles */
 header {
    
-    padding: 10px 20px; /* Padding around the header */
-    position: fixed; /* Fixes the header to the top of the page */
-    width: 100%; /* Full width */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    z-index: 1000; /* Ensures the header is above other content */
+    padding: 10px 20px; 
+    position: fixed; 
+    width: 100%;
+    top: 0; 
+    left: 0;
+    z-index: 1000; 
 }
 
 .header-container {
     display: flex;
-    justify-content: flex-end; /* Align the login button to the right */
-    background-color: yellow;
+    justify-content: flex-end; 
+   
 }
 
 .login-btn {
-    background-color: #fff; /* White background for button */
-    color: black; /* Black text color */
+    background-color: #fff; 
+    color: black; 
     border: none;
     border-radius: 5px;
-    margin-right: 80px;
+    margin-right: 30px;
+    margin-top: 30px;
     padding: 10px 20px;
-    font-size: 13px;
+    font-size: 10px;
     cursor: pointer;
-    text-decoration: none; /* Remove underline from link */
+    text-decoration: none; 
     transition: background-color 0.3s ease;
     
 }
 
 .login-btn:hover {
-    background-color: #0056b3; /* Dark blue background on hover */
-    color: white; /* Change text color to white on hover */
+    background-color: #1b2e43; 
+    color: white; 
 }
 
 /* Background container styles */
 .background-container {
-    position: absolute; /* Cover the whole viewport */
+    position: absolute; 
     top: 0;
     left: 0;
-    height: 100vh; /* Full viewport height */
-    width: 100vw;  /* Full viewport width */
-    background-size: cover; /* Scale the image to cover the container */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent image repetition */
+    height: 100vh; 
+    width: 100vw; 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden; /* Hide any overflow if necessary */
-    background-color: black;
+    overflow: hidden; 
+   background-image: url('/MiniProject-1/images/finaltemplate1.png');
 }
 
 .content {
-    text-align: center; /* Center the text and buttons */
-    color: white; /* Set text color to white for better contrast */
+    text-align: center; 
+    color: white; 
 }
 
 .show-now-btn {
-    background-color: #fff; /* White background for button */
-    color: black; /* Black text color for contrast */
+    background-color: #fff; 
+    color: black; 
     border: none;
     border-radius: 5px;
     padding: 15px 30px;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    text-transform: uppercase; /* Capitalize button text */
+    text-transform: uppercase; 
+    margin-top: 190px;
 }
 
 .show-now-btn:hover {
-    background-color: #0056b3; /* Dark blue background on hover */
-    color: white; /* Change text color to white on hover */
+    background-color: #122336;
+    color: white; 
 }
 img{
     background: white;
