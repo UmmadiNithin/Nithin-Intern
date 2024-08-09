@@ -1,196 +1,158 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
 
-body {
+
+/* Style for the Admin Container */
+.AdminContainer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
-
-.container {
-    background-color: #fff;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-
 }
 
+/* Style for the Form Container */
+.form-container {
+    width: 100%;
+    max-width: 600px; /* Set max-width to constrain the form's width */
+    margin-bottom: 30px; /* Space between the form and product cards */
+}
 
-
-h1 {
-    margin-bottom: 20px;
-    text-align: center;
+/* Style for the Form */
+#Admin-Form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between input groups */
 }
 
 .input-group {
-    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
 }
 
 .input-group label {
-    display: block;
-    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .input-group input {
-    width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007BFF;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-
-
-
-
- /* General container styling */
- .AdminContainer {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    box-sizing: border-box; 
-    
-  
-} 
-
-/* Form styling */
-form {
-    margin-bottom: 20px; 
-    width: 100%;
-    
-}
-
-.input-group {
-    margin-bottom: 15px;
-}
-
-input[type="text"], input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box; 
-}
-
- /* this button for form ad item  */
-button {
-    padding: 10px 20px;
-    background-color: #0056b3;
-    color: white;
-    border: none;
-    cursor: pointer;
+    border: 1px solid #ddd;
     border-radius: 4px;
 }
 
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
 button:hover {
     background-color: #0056b3;
 }
 
-
-
-
-/*  admin Product container styling */
-
-.DymaniContainer{
-height: 1px;
-}
-
-
-
-
-
-
-
-
-/* card styling  */
-
-
-/* Container for product cards */
-#product-container {
+/* Style for the Product Container */
+.DymaniContainer {
+    width: 100%;
     display: flex;
-    
-    gap: 20px;
-    padding: 16px;
-    justify-content: center;
-    background-color: #fff;
-    width: 100%;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
-    
+    justify-content: center;
 }
 
-
-.productCard {
-    border: 1px solid #ddd; 
-    border-radius: 10px;
-    box-shadow: 0 2px 4px #0707071a; 
-    overflow: hidden; 
-    /* width: 300px;  */
-    text-align: center; 
-    background-color: #e0dddd; 
-    height: 350px;
-    width: 250px;
-    height: fit-content;
-    
-} 
-.productCard img{
-    height: 100%;
+/* Style for Product Cards */
+#product-container {
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; 
 }
 
-#edit{
-    background-color: rgb(62, 178, 240);
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
     width: 300px;
-    
-}
-#delete{
-    background-color: rgb(241, 52, 52);
-}
-
-
-.product-image {
-    width: 50%; 
-    height: 50%; 
-   padding: 10px;
-   
+    height: 500px; 
+    background-color: white;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 8px; 
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
+.product-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3); 
+}
+
+.product-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: contain; 
+    border-radius: 8px; 
+    margin-bottom: 5px;
+}
 
 .product-card h3 {
-    font-size: 1.2em; 
-    margin: 16px 0 8px; 
+    font-size: 18px;
+    margin-bottom: 5px;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
 }
-
 
 .product-card p {
-    margin: 0 0 8px;
-    color: #555; 
-    
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical; 
 }
 
-.edit-btn{
-    margin-bottom: 5px !important
+.card-buttons {
+    display: flex;
+    justify-content: space-between;
 }
+
+.edit-btn,
+.delete-btn {
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 45%;
+    transition: background-color 0.3s ease; 
+}
+
+.edit-btn {
+    background-color: #007bff;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
 
 
 
@@ -257,8 +219,8 @@ height: 1px;
     z-index: 1;
     min-width: 160px;
     border-radius: 4px;
-    padding: 8px 0;
     right: 0;
+    padding-left: 10px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -318,7 +280,7 @@ height: 1px;
     outline: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     transition: box-shadow 0.3s ease, width 0.3s ease;
-    width: 310px; 
+    width: 410px; 
     background: #e9e7e7; 
 }
 
@@ -348,24 +310,7 @@ height: 1px;
     color: white; 
     font-size: 16px; 
 }
-
-
-
-.header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    background-color: #f1f1f1;
-    border-bottom: 1px solid #ccc;
+h1{
+   font-size: 35px;
+   font-family:monospace;
 }
-.logout {
-    text-decoration: none;
-    color: #007bff;
-    font-size: 16px;
-}
-.logout:hover {
-    text-decoration: underline;
-}
-
-
-

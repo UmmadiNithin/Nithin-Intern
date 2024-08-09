@@ -151,6 +151,15 @@
 h1{
    font-size: 35px;
    font-family:monospace;
+   color: red;
+}
+
+h2{
+    align-items: center;
+    align-content: center;
+    margin-right: 100px;
+    font-size: xx-large;
+    
 }
 
 
@@ -161,6 +170,7 @@ h1{
     color: #ecf0f1;
     padding: 20px 0;
     font-family: Arial, sans-serif;
+    
 }
 
 .footer-container {
@@ -242,4 +252,101 @@ ul li {
     padding: 10px;
     background-color: black;
     font-size: 0.9em;
+}
+
+
+
+
+
+
+/* cart styling */
+
+.size-options-container {
+    display: flex;
+    gap: 10px; 
+}
+
+.size-options-container label {
+    margin-right: 10px; 
+}
+
+
+.cart-item {
+    display: flex;
+    margin-bottom: 20px;
+    height: auto;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+    background-color:#f2f3f3;
+}
+
+.cart-item img {
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.product-details {
+    flex: 1;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.quantity-controls button {
+    width: 30px;
+    height: 30px;
+}
+
+.quantity-controls input {
+    width: 50px;
+    text-align: center;
+}
+
+.remove-btn{
+    background-color: black;
+    width: 100px;
+    border-radius: 3px;
+    color: #efeded;
+}
+h1{
+ color: black;
+font-family: Georgia, 'Times New Roman', Times, serif;
+margin-left: 450px;
+}
+    
+
+
+
+.order-summary {
+    border-top: 2px solid #ddd;
+    padding-top: 10px;
+    margin-top: 20px;
+    background-color: rgb(250, 242, 229);
+}
+
+
+.order-summary h4 {
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+.place-order-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.place-order-btn:hover {
+    background-color: #218838;
 }

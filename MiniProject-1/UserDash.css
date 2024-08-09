@@ -2,8 +2,8 @@
 
 /* Header Navigation Styling */
 .navbar {
-    background-color: #f8f9fa; /* Light background color for the navbar */
-    border-bottom: 1px solid #e3e3e3; /* Light border for separation */
+    background-color: #f8f9fa; 
+    border-bottom: 1px solid #e3e3e3; 
   }
   
   .container-fluid {
@@ -13,12 +13,12 @@
   }
   
   .navbar-brand {
-    font-weight: bold; /* Make the brand name bold */
-    color: #343a40; /* Dark color for the brand name */
+    font-weight: bold; 
+    color: #343a40; 
   }
   
   .navbar-toggler {
-    border-color: #343a40; /* Dark color for the toggle button */
+    border-color: #343a40; 
   }
   
   .navbar-collapse {
@@ -34,56 +34,49 @@
   }
   
   .nav-item {
-    margin-right: 1rem; /* Space between nav items */
+    margin-right: 1rem; 
   }
   
   .nav-link {
-    color: #343a40; /* Dark color for nav links */
+    color: #343a40; /
   }
   
   .nav-link:hover {
-    color: #007bff; /* Change color on hover */
+    color: #007bff; 
   }
   
   .nav-item.dropdown .dropdown-menu {
-    background-color: #ffffff; /* White background for dropdown */
-    border: 1px solid #e3e3e3; /* Light border for dropdown */
+    background-color: #ffffff; 
+    border: 1px solid #e3e3e3; 
   }
   
   .dropdown-item {
-    color: #343a40; /* Dark color for dropdown items */
+    color: #343a40; 
   }
   
   .dropdown-item:hover {
-    background-color: #f1f1f1; /* Light background on hover */
+    background-color: #f1f1f1; 
   }
   
  
   
   .form-control {
-    border-radius: 20px; /* Rounded corners for the search input */
-    margin-left: 1rem; /* Space between search input and button */
+    border-radius: 20px; 
+    margin-left: 1rem; 
   }
   
   .btn-outline-success {
-    border-radius: 20px; /* Rounded corners for the search button */
-    color: #28a745; /* Green color for the button text */
-    border-color: #28a745; /* Green border color */
+    border-radius: 20px; 
+    color: #28a745; 
+    border-color: #28a745; 
   }
   
   .btn-outline-success:hover {
-    background-color: #28a745; /* Green background on hover */
-    color: #ffffff; /* White text color on hover */
+    background-color: #28a745;
+    color: #ffffff;
   }
   
-marquee {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: black;
-    height: 40px;
-    align-content: center;
-    color: #fff;
 
-}
 
 
 
@@ -113,13 +106,13 @@ marquee {
 
 /* Style for individual product cards */
 .product-card {
-    border: 1px solid #ddd;
+    border: 1px solid #c5c3c3;
     border-radius: 10px;
-    box-shadow: 0 2px 4px #1e1e1e1a;
-    height: 350px;
+    box-shadow: 0 2px 4px #1f1e1e1a;
+    height: 310px;
     width: 250px;
     text-align: center;
-    
+   
     background-color: #f6f3f3;
 
 
@@ -320,8 +313,8 @@ ul li {
     z-index: 1;
     min-width: 160px;
     border-radius: 4px;
-    padding: 8px 0;
     right: 0;
+    padding-left: 10px;
 }
 
 .dropdown:hover .dropdown-content {
@@ -449,7 +442,7 @@ body {
 .slides {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    height: 260px;
+    height: 280px;
 }
 
 .slide {
@@ -464,5 +457,53 @@ body {
     height: auto;
 }
 
+
+
+
+
+/* Ensure to include a web font in your HTML head section */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+.app-banner {
+  background: linear-gradient(135deg, #1de9b6, #1d2a6b); 
+ padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #1d2a6b; 
+  height: 290px;
+}
+
+.banner-text1{
+    font-size: 40px; 
+  color: #fff; 
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: bold;  
+}
+.banner-text2{
+    font-size: 35px; 
+  color: #fff; 
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: bold;  
+}
+.banner-text3{
+    font-size: 36px; 
+  color: #fff; 
+  margin-bottom: 15px;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: bold;  
+}
+
+.app-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px; 
+}
+
+.app-link img {
+  width: 140px; 
+  height: auto;
+  vertical-align: middle;
+}
 
 

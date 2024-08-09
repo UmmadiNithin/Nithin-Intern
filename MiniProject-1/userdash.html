@@ -1,68 +1,37 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>user dashboard</title>
+    <title>User Dashboard</title>
     <link rel="stylesheet" href="UserDash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    
 </head>
 
 <body>
-<!-- 
     <section id="header">
         <a href="#"><img src="/MiniProject-1/images/nithin.png" class="logo" alt="" style="height: 60px; width: 70px; margin-right: 100;margin-bottom: 30;"></a>
+
         <div>   
             <ul id="navbar">
                 <li id="search-bar">
-                    <form action="#" method="get">
-                        <input type="text" name="search" placeholder="Search...">
+                    <form id="search-form" action="#" method="get">
+                        <input type="text" id="search-name" name="search" placeholder="Search...">
                         <button type="submit"><i class="fa-solid fa-search"></i></button>
                     </form>
                 </li>
-                
-                <li id="lg-bag"><a href="../shop/cart.html"><i class="fa-solid fa-bag-shopping" ></i></a></li>
+                <li id="lg-bag"><a href="/MiniProject-1/addtocart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
                     <div class="dropdown-content">
                         <a href="/MiniProject-1/login.html" id="login-link">Login</a>
                         <a href="/MiniProject-1/signup.html" id="signup-link">Signup</a>
-                        <h3 id="user-email"></h3>
-                        <a  id="logout-link" style="display: none;">logout</a>
-
-                      
-    
+                        <h3 id="user-email" style="display: none;"></h3>
+                        <a href="/MiniProject-1/template.html" id="logout-link" style="display: none;">Logout</a>
                     </div>
                 </li>
-            
             </ul>
         </div>
-    
-    </section> -->
-
-    <section id="header">
-    <a href="#"><img src="/MiniProject-1/images/nithin.png" class="logo" alt="" style="height: 60px; width: 70px; margin-right: 100;margin-bottom: 30;"></a>
-    <div>   
-        <ul id="navbar">
-            <li id="search-bar">
-                <form action="#" method="get">
-                    <input type="text" name="search" placeholder="Search...">
-                    <button type="submit"><i class="fa-solid fa-search"></i></button>
-                </form>
-            </li>
-            <li id="lg-bag"><a href="/MiniProject-1/addtocart.html"><i class="fa-solid fa-bag-shopping" ></i></a></li>
-            <li class="dropdown">
-                <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
-                <div class="dropdown-content">
-                    <a href="/MiniProject-1/login.html" id="login-link">Login</a>
-                    <a href="/MiniProject-1/signup.html" id="signup-link">Signup</a>
-                    <h3 id="user-email" style="display: none;"></h3>
-                    <a href="#" id="logout-link" style="display: none;">Logout</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</section>
-
+    </section>
 
     <div class="slider">
         <div class="slides">
@@ -70,25 +39,40 @@
             <div class="slide"><img src="/MiniProject-1/images/banner21.png" alt="Image 2"></div>
             <div class="slide"><img src="/MiniProject-1/images/banner27.png" alt="Image 3"></div>
             <div class="slide"><img src="/MiniProject-1/images/banner28.png" alt="Image 3"></div>
-
         </div>
     </div>
-  
- 
-    <!-- this is cards div -->
+
     <div id="product-container"></div>
 
-    <!-- Footer Section -->
+
+   
+   
+    <div class="app-banner">
+      <p class="banner-text1">Waiting Knockout Offers! waiting </p>
+      <p class="banner-text2">only on the N cart </p>
+      <p class="banner-text3">download now </p>
+      <div class="app-links">
+        <a href="https://play.google.com/store/apps" target="_blank" class="app-link">
+          <img src="/MiniProject-1/images/playstore1-removebg-preview (1).png" alt="Google Play Store"><br>
+
+        </a>
+        <a href="https://apps.apple.com/app/idXXXXXXXXX" target="_blank" class="app-link">
+            <img src="/MiniProject-1/images/appstore-removebg-preview.png" alt="Google Play Store">
+
+        </a>
+      </div>
+    </div>
+   
+      
+
+      
     <footer class="footer">
         <div class="footer-container">
-            <!-- About Us Section -->
             <div class="footer-section about-us">
                 <h2>About Us</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
             </div>
 
-            <!-- Help Section -->
             <div class="footer-section help">
                 <h2>Help</h2>
                 <ul>
@@ -98,21 +82,16 @@
                 </ul>
             </div>
 
-            <!-- Social Media Section -->
             <div class="footer-section social-media">
                 <h2>Follow Us</h2>
                 <div class="social-icons">
-                    <a href="https://facebook.com" target="_blank" class="social-icon"><i
-                            class="fab fa-facebook-f"></i></a>
+                    <a href="https://facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
                     <a href="https://twitter.com" target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="https://instagram.com" target="_blank" class="social-icon"><i
-                            class="fab fa-instagram"></i></a>
-                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i
-                            class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 
-            <!-- Mail Us Section -->
             <div class="footer-section mail-us">
                 <h2>Mail Us</h2>
                 <p>Email: <a href="mailto:info@example.com">Nithinmoonu@gmail.com</a></p>
@@ -123,10 +102,8 @@
         </div>
     </footer>
 
-
     <script src="userdash.js"></script>
     <script src="UiHeader.js"></script>
-   
 </body>
 
 </html>

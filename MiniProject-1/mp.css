@@ -10,17 +10,23 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+  
+    background-image:url('/MiniProject-1/images/bgimagelogin1.jpg');
+    height: 662px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
    
 }
 
 .container {
-    background-color: #fff;
+    
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
+    margin-left: 400px;
 }
 
 h1 {
@@ -35,6 +41,7 @@ h1 {
 .input-group label {
     display: block;
     margin-bottom: 5px;
+    
 }
 
 .input-group input {
@@ -42,6 +49,7 @@ h1 {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: whitesmoke
 }
 
 button {
@@ -49,7 +57,7 @@ button {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: black;
     color: #fff;
     font-size: 16px;
     cursor: pointer;
@@ -57,7 +65,7 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #4f4e4e;
 }
 
 

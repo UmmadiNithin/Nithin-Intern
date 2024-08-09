@@ -95,30 +95,24 @@ function displayProducts(products) {
             const product = products[key];
 
             const productCard = document.createElement('div');
-            productCard.className = 'productCard';
+            productCard.className = 'product-card';
             // productCard.setAttribute('data-key', key); 
             productCard.innerHTML = `
                 <img src="${product.url}" alt="${product.Product_Name}">
-                <div class="des">
                     <h3>${product.Product_Name}</h3>
-                    <p>${product.Product_Description}</p>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
                     <h4>Rs ${product.Product_Price}</h4>
-                    <button onclick="editProduct('${key}')" id="edit">Edit</button>
-                    <button onclick="deleteProduct('${key}')" id="delete">Delete</button>
-                </div>
+                    <p>${product.Product_Description}</p>
+                    <div class="card-buttons">
+                        <button onclick="editProduct('${key}')" class="edit-btn">Edit</button>
+                        <button onclick="deleteProduct('${key}')" class="delete-btn">Delete</button>
+                     </div>
             `;
-
             AdminContainer.appendChild(productCard);
         }
     }
 }
+
+
 
 // Edit product
 window.editProduct = function(productId) {
@@ -161,3 +155,34 @@ async function deleteProduct(productId) {
 
 // Load products on page load
 window.onload = fetchProducts;
+updateHeader()
+
+
+
+function updateHeader() {
+    const userEmail = localStorage.getItem('userEmail');
+    const loginLink = document.getElementById('login-link');
+    const signupLink = document.getElementById('signup-link');
+    const userEmailDisplay = document.getElementById('user-email');
+    const logoutLink = document.getElementById('logout-link');
+
+    if (userEmail) {
+        // User is logged in
+        loginLink.style.display = 'none';
+        signupLink.style.display = 'none';
+        userEmailDisplay.textContent = ` ${userEmail}`; 
+        userEmailDisplay.style.display = 'block';
+        logoutLink.style.display = 'block';
+        
+        logoutLink.addEventListener('click', function() {
+            localStorage.removeItem('userEmail');
+            window.location.href = '/MiniProject-1/login.html'; // Redirect to login page
+        });
+    } else {
+        // User is not logged in
+        loginLink.style.display = 'block';
+        signupLink.style.display = 'block';
+        userEmailDisplay.style.display = 'none';
+        logoutLink.style.display = 'none';
+    }
+}

@@ -1,64 +1,4 @@
 
-
-//conditions for login
-
-// document.getElementById('signup-form').addEventListener('submit', function (event) {
-//   event.preventDefault();
-//   checklogin();
-// });
-
-// async function checklogin() {
-//   const email = document.getElementById('email').value;
-//   const password = document.getElementById('password').value;
-
-//   try {
-
-//     const url = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/signup.json`;
-
-//     const response = await fetch(url, {
-//       method: 'GET',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       }
-//     });
-
-
-    
-//     if (!response.ok) {
-//       throw new Error(`Network response was not ok. Status: ${response.status}`);
-//     }
-//     const users = await response.json();
-
-
-//     if (!users) {
-//       alert('No users found. Please sign up.');
-//       return;
-//     }
-//     const user = Object.values(users).find(user => user.email === email && user.password === password);
-
-
-//     if (user) {
-
-//       console.log('Login successful for user:', user);
-//       localStorage.setItem('userEmail', email);
-//       localStorage.setItem('isAdmin', user.admin );
-//       localStorage.setItem('isLoggedIn', 'true');
-
-//       if (user.admin === true) {
-//         window.location.href = "/MiniProject-1/admin/admin.html";
-//       } else {
-//         window.location.href = "/MiniProject-1/userdash.html";
-//       }
-//     } else {
-//       alert('user doesnot exist please signup !');
-//     }
-//   } catch (error) {
-//     console.error('Error:', error);
-
-//   }
-// }
-
-
 document.getElementById('signup-form').addEventListener('submit', function(event) {
   event.preventDefault();
   checkLogin();
@@ -86,14 +26,14 @@ async function checkLogin() {
       if (!response.ok) {
           throw new Error(`Network response was not ok. Status: ${response.status}`);
       }
-      
+
       const users = await response.json();
 
       if (!users) {
           alert('No users found. Please sign up.');
           return;
       }
-      
+
       const user = Object.values(users).find(user => user.email === email && user.password === password);
 
       if (user) {
@@ -112,11 +52,46 @@ function loginUser(userEmail, isAdmin) {
   localStorage.setItem('userEmail', userEmail);
   localStorage.setItem('isAdmin', isAdmin);
   localStorage.setItem('isLoggedIn', 'true');
-  localStorage.setItem('cart', JSON.stringify([])); // Initialize empty cart for new login
-  
+  localStorage.setItem('cart', JSON.stringify([])); 
+
   if (isAdmin) {
       window.location.href = "/MiniProject-1/admin/admin.html";
   } else {
       window.location.href = "/MiniProject-1/userdash.html";
+  }
+}
+
+document.getElementById('logout-link').addEventListener('click', function() {
+  logoutUser();
+});
+
+function logoutUser() {
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('cart');
+  localStorage.removeItem('isLoggedIn');
+  localStorage.removeItem('isAdmin');
+  
+  updateHeader();
+  window.location.href = '/MiniProject-1/login.html'; // Redirect to login page
+}
+
+function updateHeader() {
+  const userEmailDisplay = document.getElementById('user-email');
+  const loginLink = document.getElementById('login-link');
+  const signupLink = document.getElementById('signup-link');
+  const logoutLink = document.getElementById('logout-link');
+
+  
+  if (localStorage.getItem('userEmail')) {
+      userEmailDisplay.textContent = ` ${localStorage.getItem('userEmail')}`;
+      loginLink.style.display = 'none';
+      signupLink.style.display = 'none';
+      userEmailDisplay.style.display = 'block';
+      logoutLink.style.display = 'block';
+  } else {
+      loginLink.style.display = 'block';
+      signupLink.style.display = 'block';
+      userEmailDisplay.style.display = 'none';
+      logoutLink.style.display = 'none';
   }
 }

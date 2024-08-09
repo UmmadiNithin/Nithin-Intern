@@ -25,7 +25,7 @@ function displayProduct(product, key) {
             </div>
             <div class="productDetails">
                 <h3>${product.Product_Name}</h3>
-                <h4>The Details:</h4>
+                <h5>The Details:</h5>
                 <p>${product.Product_Description}</p>
                 <div class="stars">
                     <i class="fas fa-star"></i>
@@ -43,9 +43,14 @@ function displayProduct(product, key) {
         </div>
     `;
 
-    // Add event listener for the Add to Cart button
+   
     document.getElementById('add-to-cart').addEventListener('click', () => addToCart(key));
+    document.getElementById('buy-now').addEventListener('click', () => {
+        window.location.href='/MiniProject-1/placeorder.html'
+    });
+
 }
+
 
 // On page load, fetch the product details based on the URL parameter
 window.onload = () => {
@@ -53,13 +58,13 @@ window.onload = () => {
     const productId = urlParams.get('product');
 
     if (productId) {
-        fetchProductDetails(productId);
+        fetchProductDetails(productId); 
     } else {
         console.error('Product ID not found in URL');
         alert('Product ID not found.');
     }
 
-    updateHeader(); // Update header on page load
+    updateHeader(); 
 };
 
 function updateHeader() {
@@ -70,19 +75,19 @@ function updateHeader() {
     const logoutLink = document.getElementById('logout-link');
 
     if (userEmail) {
-        // User is logged in
+       
         loginLink.style.display = 'none';
         signupLink.style.display = 'none';
-        userEmailDisplay.textContent = `Welcome, ${userEmail}`;
+        userEmailDisplay.textContent = ` ${userEmail}`;
         userEmailDisplay.style.display = 'block';
         logoutLink.style.display = 'block';
         
         logoutLink.addEventListener('click', function() {
             localStorage.removeItem('userEmail');
-            window.location.href = '/MiniProject-1/login.html'; // Redirect to login page
+            window.location.href = '/MiniProject-1/login.html'; 
         });
     } else {
-        // User is not logged in
+       
         loginLink.style.display = 'block';
         signupLink.style.display = 'block';
         userEmailDisplay.style.display = 'none';
@@ -90,28 +95,49 @@ function updateHeader() {
     }
 }
 
+
+
+
 function addToCart(productId) {
     const isLoggedIn = localStorage.getItem('userEmail') !== null;
 
     if (isLoggedIn) {
-        const product = {
-            id: productId,
-            name: document.querySelector(`.productCard .productDetails h3`).innerText,
-            price: document.querySelector(`.productCard .productDetails h4`).innerText.replace('Rs. ', ''),
-            image: document.querySelector(`.productCard .productImage img`).src,
-        };
+        // Attempt to fetch product details
+        try {
+            const nameElement = document.querySelector(`.productCard .productDetails h3`);
+            const priceElement = document.querySelector(`.productCard .productDetails  h4`);
+            console.log('====================================');
+            console.log(priceElement);
+            console.log('====================================');
+            const imageElement = document.querySelector(`.productCard .productImage img`);
+            
+            if (!nameElement || !priceElement || !imageElement) {
+                throw new Error('Product details elements not found.');
+            }
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(product);
-        localStorage.setItem('cart', JSON.stringify(cart));
+            const product = {
+                id: productId,
+                name: nameElement.innerText,
+                price: priceElement.innerText.  replace('Rs. ', '').trim(), 
+                image: imageElement.src,
+            };
 
-        alert('Product added to cart!');
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            console.log('====================================');
+            console.log(product);
+            console.log('====================================');
+
+            alert('Product added to cart!');
+        } catch (error) {
+            console.error('Error adding product to cart:', error);
+            alert('There was an error adding the product to the cart.');
+        }
     } else {
         alert('You must be logged in to add products to the cart.');
         window.location.href = '/MiniProject-1/login.html'; 
     }
 }
 
-function buyNow(productId) {
-    // Add functionality for "Buy Now" button
-}
+
