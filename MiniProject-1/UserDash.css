@@ -327,6 +327,7 @@ ul li {
     text-decoration: none;
     display: block;
     cursor: pointer;
+    
 }
 
 .dropdown-content a:hover {
@@ -335,6 +336,7 @@ ul li {
 
 .dropdown-content a + a {
     border-top: 1px solid #f1f1f1;
+    
 }
 
 .dropbtn {
@@ -354,6 +356,7 @@ ul li {
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    
 }
 
 
@@ -370,7 +373,7 @@ ul li {
 #search-bar input[type="text"] {
     padding: 10px 15px;
     border: none;
-    border-radius: 25px;
+    border-radius: 22px;
     outline: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     transition: box-shadow 0.3s ease, width 0.3s ease;
@@ -386,7 +389,7 @@ ul li {
 #search-bar button {
     position: absolute;
     right: 10px;
-    background: #8e8f8f; 
+    background: #575858; 
     border: none;
     border-radius: 50%;
     padding: 8px;

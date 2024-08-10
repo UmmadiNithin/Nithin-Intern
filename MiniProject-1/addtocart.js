@@ -9,8 +9,6 @@ window.onload = () => {
         } else {
             let totalAmount = 0;
             cart.forEach(product => {
-                console.log(product);
-                
                 const price = parseFloat(product.price) || 0;
                 totalAmount += price;
                 cartContainer.innerHTML += `
@@ -47,6 +45,9 @@ window.onload = () => {
         if (event.target.classList.contains('remove-btn')) {
             const productId = event.target.getAttribute('data-product-id');
             removeProductFromCart(productId);
+        } else if (event.target.classList.contains('place-order-btn')) {
+            // Redirect to the order page
+            window.location.href = '/MiniProject-1/placeorder.html'; 
         }
     });
 
