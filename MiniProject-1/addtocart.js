@@ -37,6 +37,7 @@ window.onload = () => {
 
     const removeProductFromCart = (productId) => {
         cart = cart.filter(product => product.id !== productId);
+       
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartDisplay();
     };
@@ -46,7 +47,7 @@ window.onload = () => {
             const productId = event.target.getAttribute('data-product-id');
             removeProductFromCart(productId);
         } else if (event.target.classList.contains('place-order-btn')) {
-            // Redirect to the order page
+            
             window.location.href = '/MiniProject-1/placeorder.html'; 
         }
     });

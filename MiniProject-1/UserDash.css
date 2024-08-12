@@ -510,3 +510,35 @@ body {
 }
 
 
+
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(90deg, #ff6f61, #dcb0ff); /* Gradient from vibrant coral to neon purple */
+    border-radius: 8px; /* Rounded corners */
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Enhanced shadow for depth */
+    position: relative;
+    height: 60px; /* Adjust height as needed */
+    display: flex;
+    align-items: center;
+  }
+  
+  .marquee p {
+    position: absolute;
+    white-space: nowrap;
+    animation: marquee 10s linear infinite;
+    font-size: 1.4em; /* Font size */
+    color: #ffffff; /* White text color for high contrast */
+    font-weight: bold; /* Bold text for emphasis */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    text-shadow: 0 0 8px #ff6f61, 0 0 12px #dcb0ff; 
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+  }
+  

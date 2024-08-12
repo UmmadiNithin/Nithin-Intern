@@ -6,7 +6,7 @@ window.onload = function() {
     const searchForm = document.getElementById('search-form');
     if (searchForm) {
         searchForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
+            event.preventDefault(); 
             search();
         });
     }
@@ -44,7 +44,9 @@ async function fetchProducts() {
     try {
         const productURL = 'https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data.json';
         const response = await fetch(productURL);
-
+console.log('====================================');
+console.log(response);
+console.log('====================================');
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
@@ -103,7 +105,7 @@ function moveToNextSlide() {
     slides.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
-setInterval(moveToNextSlide, 3000); // Change slide every 3 seconds
+setInterval(moveToNextSlide, 3000); 
 
 
 

@@ -55,9 +55,11 @@ function displayProduct(product, key) {
 // On page load, fetch the product details based on the URL parameter
 window.onload = () => {
     const urlParams = new URLSearchParams(window.location.search);
+ 
     const productId = urlParams.get('product');
 
     if (productId) {
+        
         fetchProductDetails(productId); 
     } else {
         console.error('Product ID not found in URL');
@@ -102,7 +104,7 @@ function addToCart(productId) {
     const isLoggedIn = localStorage.getItem('userEmail') !== null;
 
     if (isLoggedIn) {
-        // Attempt to fetch product details
+       
         try {
             const nameElement = document.querySelector(`.productCard .productDetails h3`);
             const priceElement = document.querySelector(`.productCard .productDetails  h4`);
