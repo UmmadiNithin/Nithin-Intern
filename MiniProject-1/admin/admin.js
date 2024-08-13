@@ -1,3 +1,11 @@
+import {getFile} from '/MiniProject-1/modules.js'
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetchProducts();
+    updateHeader();
+});
+
 document.getElementById('Admin-Form').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -9,7 +17,6 @@ document.getElementById('Admin-Form').addEventListener('submit', async (event) =
     const upload_image = document.getElementById('product-image').dataset.url;
 
     if (productName === '' || price === '' || productDescription === '') {
-      
         alert('Please fill in all fields.');
         return false;
     }
@@ -27,6 +34,7 @@ document.getElementById('Admin-Form').addEventListener('submit', async (event) =
             productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
             method = 'PUT';
         }
+
         const response = await fetch(productURL, {
             method: method,
             headers: { 'Content-Type': 'application/json' },
@@ -51,21 +59,7 @@ document.getElementById('Admin-Form').addEventListener('submit', async (event) =
     }
 });
 
-// Upload image
-function getFile(event) {
-    const file = event.target.files[0];
 
-    if (file) {
-        const reader = new FileReader();
-
-        reader.onloadend = function () {
-            document.getElementById('product-image').dataset.url = reader.result;
-        };
-
-        reader.readAsDataURL(file);
-    }
-}
-document.getElementById('product-image').addEventListener('change', getFile);
 
 // Fetch products
 async function fetchProducts() {
@@ -96,28 +90,43 @@ function displayProducts(products) {
 
             const productCard = document.createElement('div');
             productCard.className = 'product-card';
-            // productCard.setAttribute('data-key', key); 
             productCard.innerHTML = `
                 <img src="${product.url}" alt="${product.Product_Name}">
-                    <h3>${product.Product_Name}</h3>
-                    <h4>Rs ${product.Product_Price}</h4>
-                    <p>${product.Product_Description}</p>
-                    <div class="card-buttons">
-                        <button onclick="editProduct('${key}')" class="edit-btn">Edit</button>
-                        <button onclick="deleteProduct('${key}')" class="delete-btn">Delete</button>
-                     </div>
+                <h3>${product.Product_Name}</h3>
+                <h4>Rs ${product.Product_Price}</h4>
+                <p>${product.Product_Description}</p>
+                <div class="card-buttons">
+                    <button onclick="editProduct('${key}')" class="edit-btn">Edit</button>
+                    <button onclick="deleteProduct('${key}')" class="delete-btn">Delete</button>
+                </div>
             `;
             AdminContainer.appendChild(productCard);
         }
     }
 }
 
+// // Edit product
+// window.editProduct = function(productId) {
+//     const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
+//     fetch(productURL)
+//         .then(response => response.json())
+//         .then(product => {
+//             document.getElementById('productId').value = productId;
+//             document.getElementById('Product-Name').value = product.Product_Name;
+//             document.getElementById('Product-Description').value = product.Product_Description;
+//             document.getElementById('Product-Price').value = product.Product_Price;
+//             document.getElementById('product-image').dataset.url = product.url;
+//             document.getElementById('Admin-Form').scrollIntoView({ behavior: 'smooth' });
+//             document.querySelector('AddItem [type="submit"]').textContent='edit item';
+
+//         })
+//         .catch(error => console.error('Error fetching product:', error));
+// }
 
 
 // Edit product
 window.editProduct = function(productId) {
     const productURL = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
-
     fetch(productURL)
         .then(response => response.json())
         .then(product => {
@@ -126,10 +135,67 @@ window.editProduct = function(productId) {
             document.getElementById('Product-Description').value = product.Product_Description;
             document.getElementById('Product-Price').value = product.Product_Price;
             document.getElementById('product-image').dataset.url = product.url;
-            document.getElementById('Admin-Form').style.display = 'block';
+            document.getElementById('Admin-Form').scrollIntoView({ behavior: 'smooth' });
+            
+            // Change button text and ID
+            const addButton = document.getElementById('AddItem');
+            addButton.textContent = 'Update Item';
+            addButton.setAttribute('id', 'UpdateItem');
         })
         .catch(error => console.error('Error fetching product:', error));
 }
+
+// Handle form submission
+document.getElementById('Admin-Form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const button = document.getElementById('AddItem') || document.getElementById('UpdateItem');
+    const isEditing = button && button.id === 'UpdateItem';
+    
+    const productId = document.getElementById('productId').value;
+    const productName = document.getElementById('Product-Name').value;
+    const productDescription = document.getElementById('Product-Description').value;
+    const productPrice = document.getElementById('Product-Price').value;
+    const productImageURL = document.getElementById('product-image').dataset.url;
+    
+    const productData = {
+        Product_Name: productName,
+        Product_Description: productDescription,
+        Product_Price: productPrice,
+        url: productImageURL
+    };
+    
+    let url;
+    let method;
+    
+    if (isEditing) {
+        url = `https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/${productId}.json`;
+        method = 'PUT'; 
+    } else {
+        url = 'https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data/.json';
+        method = 'POST'; 
+    }
+    
+    fetch(url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Product saved:', data);
+        document.getElementById('Admin-Form').reset();
+        const addButton = document.getElementById('UpdateItem');
+        if (addButton) {
+            addButton.textContent = 'Add Item';
+            addButton.setAttribute('id', 'AddItem');
+        }
+    })
+    .catch(error => console.error('Error saving product:', error));
+});
+
 
 // Delete product
 async function deleteProduct(productId) {
@@ -153,12 +219,7 @@ async function deleteProduct(productId) {
     }
 }
 
-// Load products on page load
-window.onload = fetchProducts;
-updateHeader()
-
-
-
+// Update header based on user status
 function updateHeader() {
     const userEmail = localStorage.getItem('userEmail');
     const loginLink = document.getElementById('login-link');

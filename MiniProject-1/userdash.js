@@ -1,3 +1,4 @@
+
 window.onload = function() {
     updateHeader();
     fetchProducts();
@@ -44,9 +45,7 @@ async function fetchProducts() {
     try {
         const productURL = 'https://shopping-cart-b3f52-default-rtdb.firebaseio.com/Product-Data.json';
         const response = await fetch(productURL);
-console.log('====================================');
-console.log(response);
-console.log('====================================');
+
         if (!response.ok) {
             throw new Error('Failed to fetch products');
         }
