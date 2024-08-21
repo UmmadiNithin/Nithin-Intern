@@ -1,0 +1,27 @@
+
+<html>
+<body>
+    <h1>Checking whether first letter in a string is upper or not</h1>
+    <input id="input">
+    <button type="button" onclick="inputfun()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        const inputfun = () => {
+            let input = document.getElementById('input').value;
+            const firstChar = input.charAt(0)
+
+            const condition = /^[A-Z]/
+
+
+            if (condition.test(firstChar)) {
+                document.getElementById('result').textContent = `First character "${firstChar}" is uppercase.`;
+            }
+             else 
+            {
+                document.getElementById('result').textContent = `First character "${firstChar}" is not uppercase.`;
+            }
+        };
+    </script>
+</body>
+</html>

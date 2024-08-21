@@ -1,0 +1,29 @@
+<html>
+    <body>
+
+        <div style="padding: 40px;">
+    
+        <label>Enter your Email :</label>
+        <input placeholder="enter valid email" id="input">
+        <p style="color: red; font-size: small;">NOTE :Use Uppercase (A-Z) and lowercase (a-z) English letters
+            Digits (0-9). also use some special characters (! # $ % & ' * + - / = ? ^ _ ` { | } ~ >).>
+        </p>
+        <button type="button"  onclick="display()">Submit</button>
+            
+    </div>
+    </body>
+    <script> 
+    const display=() =>
+    {
+        const input= document.getElementById('input').value
+
+      console.log(input)
+      
+      const condition= /^[a-zA-Z0-9]+@[a-zA-Z]+(\.[a-zA-Z]+)+$/;
+      const result=condition.test(input)
+      console.log(result)
+    
+    }
+    
+    </script>
+</html>

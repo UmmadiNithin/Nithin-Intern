@@ -1,0 +1,7 @@
+[
+    { "username": "nithin", "password": "nithin123", "email": "nithin@gmail.com", "age": 22 },
+    { "username": "pavan", "password": "pavan123", "email": "pavan@gmail.com", "age": 20 },
+    { "username": "deepak", "password": "deepak123", "email": "deepak@gmail.com", "age": 24 },
+    { "username": "farook", "password": "farook123", "email": "farook@gmail.com", "age": 21 },
+    { "username": "basha", "password": "basha123", "email": "basha@gmail.com", "age": 23 }
+]
