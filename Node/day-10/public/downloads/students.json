@@ -1,0 +1,74 @@
+[
+  {
+    "id": 4,
+    "name": "umar",
+    "email": "umar@example.com",
+    "phone_no": "5678901234",
+    "address": "321 Maple St",
+    "department": "mech",
+    "institution": "lpu"
+  },
+  {
+    "id": 5,
+    "name": "farook",
+    "email": "farook@example.com",
+    "phone_no": "5678901234",
+    "address": "321 Maple St",
+    "department": "cse",
+    "institution": "ksrm"
+  },
+  {
+    "id": 6,
+    "name": "basha",
+    "email": "basha@example.com",
+    "phone_no": "5678901234",
+    "address": "321 Maple St",
+    "department": "ece",
+    "institution": "rgm"
+  },
+  {
+    "id": 7,
+    "name": "harsha",
+    "email": "harsha@example.com",
+    "phone_no": "5678901234",
+    "address": "321 Maple St",
+    "department": "mech",
+    "institution": "Sv"
+  },
+  {
+    "id": 8,
+    "name": "dhanan",
+    "email": "dhanan@example.com",
+    "phone_no": "5678901234",
+    "address": "321 Maple St",
+    "department": "mech",
+    "institution": "kl"
+  },
+  {
+    "id": 9,
+    "name": "novfal",
+    "email": "novfal@example.com",
+    "phone_no": "3456789012",
+    "address": "789 Pine St",
+    "department": "civil",
+    "institution": "knl"
+  },
+  {
+    "id": 10,
+    "name": "babu",
+    "email": "babu@example.com",
+    "phone_no": "5678901234",
+    "address": "321 Maple St",
+    "department": "ece",
+    "institution": "rgm"
+  },
+  {
+    "id": 3,
+    "name": "kalyan",
+    "email": "kalyan@example.com",
+    "phone_no": "9502145755",
+    "address": "pdtr",
+    "department": "cse",
+    "institution": "rgm"
+  }
+]
