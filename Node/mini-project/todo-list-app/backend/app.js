@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const path = require('path'); 
 const sequelize = require('./config/database'); 
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
-const collaboratorRoutes = require('./routes/collaboratorRoutes');
-const cors=require('cors')
+const collaboratorRoutes = require('./routes/collaboratorRoutes');  
+const cors=require('cors');
+const { FORCE } = require('sequelize/lib/index-hints');
 
 const app = express();
 
@@ -13,6 +13,7 @@ const app = express();
 app.use(bodyParser.json()); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('frontend')); 
 app.use(cors())
 
 // Routes
@@ -20,29 +21,13 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/collaborators', collaboratorRoutes);
 
-// app.get('/login', (req, res) => {
-//     console.log('Serving login HTML file');
-//     res.sendFile(path.join(__dirname, 'frontend', 'login.html'));
-// });
 
-// app.get('/register', (req, res) => {
-//     console.log('Serving register HTML file');
-//     res.sendFile(path.join(__dirname, 'frontend', 'register.html'));
-// });
-
-// app.get('/home', (req, res) => {
-//     console.log('Serving home HTML file');
-//     res.sendFile(path.join(__dirname, 'frontend', 'home.html'));
-// });
-
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'frontend', 'home.html'));
-// });
 
 sequelize.authenticate()
     .then(() => {
         console.log('Database connected successfully');
-        return sequelize.sync(); 
+        return sequelize.sync({alter: true}); 
+
     })
     .then(() => {
         app.listen(3000, () => {

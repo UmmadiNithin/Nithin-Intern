@@ -78,15 +78,15 @@ exports.login = async (req, res) => {
         if (!validPassword) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
-
+        const status="login successful";
         // Generate a JWT token
-        const token = jwt.sign({ id: user.id, email: user.email }, 'yourSecretKey', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user.id, email: user.email }, '123', { expiresIn: '1h' });
 
         // Respond with the token
-        res.status(200).json({ token });
+        res.status(200).json({ token,status});
        
     } catch (error) {
-        console.error(error);  // Log error for debugging
+        console.error(error); 
         res.status(500).json({ error: 'An unexpected error occurred. Please try again later.' });
     }
 };

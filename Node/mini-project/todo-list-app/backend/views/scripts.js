@@ -20,8 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify({ task, category, dueDate })
             });
 
-            console.log('Response Status:', response.status);
-            console.log('Response Headers:', response.headers);
             const result = await response.json(); 
 
             if (response.ok) {
@@ -30,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetchTasks(); 
             } else {
                 console.error('Failed to create task:', result);
-                alert('Failed to create task: ' + result.message);
+                alert('Failed to create task: ' + result.error);
             }
         } catch (error) {
             console.error('Request error:', error);
@@ -38,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Handle delete selected tasks
     document.getElementById('deleteSelectedBtn').addEventListener('click', async () => {
         const selectedIds = Array.from(document.querySelectorAll('input[type="checkbox"]:checked'))
                                   .map(cb => cb.dataset.id);
@@ -59,11 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
 
-                console.log('Delete Response Status:', response.status);
-                console.log('Delete Response Headers:', response.headers);
-                const result = await response.json(); 
-
                 if (!response.ok) {
+                    const result = await response.json();
                     console.error('Failed to delete task:', id, result); 
                     alert('Failed to delete task with ID: ' + id);
                 }
@@ -76,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Fetch and display tasks
 async function fetchTasks() {
     const token = localStorage.getItem('token'); 
 
@@ -89,8 +82,6 @@ async function fetchTasks() {
             }
         });
 
-        console.log('Fetch Response Status:', response.status);
-        console.log('Fetch Response Headers:', response.headers);
         const result = await response.json(); 
 
         if (response.ok) {
@@ -104,14 +95,14 @@ async function fetchTasks() {
                     <td><input type="checkbox" data-id="${task.id}"></td>
                     <td>${task.task}</td>
                     <td>${task.category}</td>
-                    <td>${task.dueDate}</td>
+                    <td>${new Date(task.dueDate).toISOString().split('T')[0]}</td>
                     <td><button onclick="editTask('${task.id}')">Edit</button></td>
                 `;
                 tbody.appendChild(row);
             });
         } else {
             console.error('Failed to fetch tasks:', result);
-            alert('Failed to fetch tasks: ' + result.message);
+            alert('Failed to fetch tasks: ' + result.error);
         }
     } catch (error) {
         console.error('Request error:', error);
@@ -119,7 +110,6 @@ async function fetchTasks() {
     }
 }
 
-// Edit task (you need to implement this function)
 async function editTask(id) {
     const token = localStorage.getItem('token'); 
 
@@ -132,15 +122,13 @@ async function editTask(id) {
             }
         });
 
-        console.log('Edit Task Response Status:', response.status);
-        console.log('Edit Task Response Headers:', response.headers);
         const result = await response.json(); 
 
         if (response.ok) {
             const task = result; 
             document.getElementById('task').value = task.task;
             document.getElementById('category').value = task.category;
-            document.getElementById('dueDate').value = task.dueDate;
+            document.getElementById('dueDate').value = new Date(task.dueDate).toISOString().split('T')[0];
 
             document.getElementById('taskForm').onsubmit = async (e) => {
                 e.preventDefault();
@@ -148,7 +136,7 @@ async function editTask(id) {
             };
         } else {
             console.error('Failed to load task details:', result);
-            alert('Failed to load task details: ' + result.message);
+            alert('Failed to load task details: ' + result.error);
         }
     } catch (error) {
         console.error('Request error:', error); 
@@ -156,7 +144,6 @@ async function editTask(id) {
     }
 }
 
-// Update task
 async function updateTask(id) {
     const task = document.getElementById('task').value;
     const category = document.getElementById('category').value;
@@ -173,8 +160,6 @@ async function updateTask(id) {
             body: JSON.stringify({ task, category, dueDate })
         });
 
-        console.log('Update Task Response Status:', response.status);
-        console.log('Update Task Response Headers:', response.headers);
         const result = await response.json(); 
 
         if (response.ok) {
@@ -183,7 +168,7 @@ async function updateTask(id) {
             fetchTasks(); 
         } else {
             console.error('Failed to update task:', result);
-            alert('Failed to update task: ' + result.message);
+            alert('Failed to update task: ' + result.error);
         }
     } catch (error) {
         console.error('Request error:', error); 
