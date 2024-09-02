@@ -1,156 +1,175 @@
+/* General styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1, h2 {
-    text-align: center;
-    color: #333;
-  }
-  
-  form {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  form input, form select {
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  #addTaskBtn {
-    padding: 10px 20px;
-    background-color: green;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  table, th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  th {
-    background-color: #f2f2f2;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: red;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #eaeaea; /* Light grey for a subtle background */
+  margin: 0;
+  padding: 0;
+}
 
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 20px;
+}
 
-
-
-
-  /* Header styling */
+/* Header styles */
 header {
-  background-color: #f4f4f4;
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
+  background-color: #f8bbd0; /* Baby pink mixed color */
+  color: white;
+  padding: 15px 0; /* Increased padding for a more attractive header */
 }
 
 .header-container {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo img {
-  height: 40px; /* Adjust as needed */
+  height: 50px; /* Slightly increased logo size */
 }
 
-.search-bar {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  margin: 0 20px;
-}
-
-.search-bar input {
-  padding: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px 0 0 4px;
-  flex: 1;
+.search-bar input[type="text"] {
+  padding: 10px;
+  border: none;
+  border-radius: 5px 0 0 5px;
+  width: 200px; /* Increased width for better visibility */
+  font-size: 16px; /* Larger font size */
 }
 
 .search-bar button {
-  padding: 5px 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-left: none;
-  background-color: #5cb85c;
+  padding: 10px;
+  border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #ff5722; /* Vivid orange for contrast */
   color: white;
-  border-radius: 0 4px 4px 0;
   cursor: pointer;
+  font-size: 16px; /* Larger font size */
 }
 
 .search-bar button:hover {
-  background-color: #4cae4c;
+  background-color: #e64a19; /* Slightly darker shade for hover */
 }
 
+/* User info dropdown styles */
 .user-info {
   display: flex;
   align-items: center;
 }
 
-#username {
+.user-info span {
   margin-right: 10px;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropbtn {
-  background-color: #f4f4f4;
-  border: none;
-  cursor: pointer;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  right: 0;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
+  color: #333;
+  padding: 10px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
 
-.dropdown:hover .dropdown-content {
-  display: block;
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #ffffff;
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 70%; /* Could be more or less, depending on screen size */
+  max-width: 600px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.close {
+  color: #ff5722; /* Vivid orange */
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #e64a19; /* Slightly darker shade for hover */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Task box styles */
+.task-box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.task-box h3 {
+  margin-top: 0;
+}
+
+/* Input field styles */
+.input-field {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: calc(100% - 22px);
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Modal input field styles */
+#taskTitle {
+  background-color: #e8f5e9; /* Light green */
+}
+
+#taskDescription {
+  background-color: #e0f2f1; /* Light cyan */
+}
+
+#taskStatus, #taskDueDate, #taskPriority {
+  background-color: #fce4ec; /* Light pink */
+}
+
+/* Add Task button styles */
+button[type="submit"] {
+  background-color: #ff5722; /* Vivid orange */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #e64a19; /* Slightly darker shade for hover */
+}
+
+/* Modal row styles */
+.modal-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-row select, .modal-row input[type="date"] {
+  width: 32%;
 }

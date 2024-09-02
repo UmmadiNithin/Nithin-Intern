@@ -1,13 +1,10 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do App</title>
-  <link rel="stylesheet" href="homestyles.css">
+  <link rel="stylesheet" href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/homestyles.css">
 </head>
 <body>
 
@@ -36,38 +33,41 @@
   <div class="container">
     <h1>TODO APP</h1>
     
-    <form id="taskForm">
-      <input type="text" id="task" placeholder="What do you need to do?" required>
-      
-      <select id="category" required>
-        <option value="PERSONAL">Personal</option>
-        <option value="WORK">Work</option>
-        <option value="SCHOOL">School</option>
-        <option value="CLEANING">Cleaning</option>
-        <option value="OTHER">Other</option>
-      </select>
-      
-      <input type="date" id="dueDate" required>
-      
-      <button type="submit" id="addTaskBtn">ADD TASK</button>
-    </form>
+    <button id="openModalBtn">Add Task</button>
+
+    <!-- Modal -->
+    <div id="taskModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add/Edit Task</h2>
+        <form id="taskForm">
+          <input type="text" id="taskTitle" placeholder="Title" class="input-field" required>
+          <textarea id="taskDescription" placeholder="Description" class="input-field" rows="4" required></textarea>
+          
+          <div class="modal-row">
+            <select id="taskStatus" class="input-field" required>
+              <option value="TODO">To Do</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="DONE">Done</option>
+            </select>
+            <input type="date" id="taskDueDate" class="input-field" required>
+            <select id="taskPriority" class="input-field" required>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+            </select>
+          </div>
+          
+          <button type="submit" id="addTaskBtn">Save Task</button>
+        </form>
+      </div>
+    </div>
 
     <h2>TASKS LIST</h2>
-    <table id="tasksTable">
-      <thead>
-        <tr>
-          <th>Select</th>
-          <th>Task</th>
-          <th>Category</th>
-          <th>Due Date</th>
-          <th>Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Tasks will be dynamically added here -->
-      </tbody>
-    </table>
-    <button id="deleteSelectedBtn">DELETE TASK</button>
+    <div id="tasksContainer">
+      <!-- Tasks will be dynamically added here -->
+    </div>
+    <button id="deleteSelectedBtn">Delete Selected</button>
   </div>
 
   <script src="scripts.js"></script>

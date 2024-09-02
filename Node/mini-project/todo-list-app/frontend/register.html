@@ -5,6 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - ToDo App</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.5);
+            padding-top: 60px;
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        .close {
+            color: #333;
+            float: right;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+        .modal-message {
+            margin: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        .modal-button {
+            background-color: #5CB85C;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .modal-button:hover {
+            background-color: #4A9E4A;
+        }
+    </style>
 </head>
 <body>
     <div class="register-container">
@@ -18,45 +74,72 @@
         <p>Already have an account? <a href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/login.html">Login here</a></p>
     </div>
 
+    <!-- Modal for messages -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <p id="modalMessage" class="modal-message"></p>
+            <button id="modalButton" class="modal-button">OK</button>
+        </div>
+    </div>
+
     <script>
-    
-    document.getElementById('registerForm').addEventListener('submit', async function (event) {
-        event.preventDefault();
-
-        const formData = new FormData(this);
-        const formObject = Object.fromEntries(formData);
-
-        try {
-            const response = await fetch('http://localhost:3000/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formObject)
-            });
-
-            // Handle non-JSON responses or empty bodies
-            if (response.ok) {
-                const contentType = response.headers.get('content-type');
-                if (contentType && contentType.includes('application/json')) {
-                    const result = await response.json();
-                    alert(result.message || 'Registration successful');
-                    window.location.href = 'login.html';
-                } else {
-                    alert('Registration successful');
-                    window.location.href = 'login.html';
-                }
-            } else {
-                const error = await response.json();
-                alert(error.message || 'Registration failed');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An unexpected error occurred. Please try again later.');
+        // Function to show the modal with a message
+        function showModal(message) {
+            document.getElementById('modalMessage').innerText = message;
+            document.getElementById('messageModal').style.display = 'block';
+            document.getElementById('messageModal').style.opacity = '1';
+            document.querySelector('.modal-content').style.transform = 'scale(1)';
         }
-    });
 
+        // Function to hide the modal
+        function closeModal() {
+            document.getElementById('messageModal').style.opacity = '0';
+            document.querySelector('.modal-content').style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                document.getElementById('messageModal').style.display = 'none';
+            }, 300);
+        }
 
+        // Event listener for modal close button
+        document.getElementById('closeModal').addEventListener('click', closeModal);
+        document.getElementById('modalButton').addEventListener('click', closeModal);
+
+        window.addEventListener('click', function(event) {
+            if (event.target == document.getElementById('messageModal')) {
+                closeModal();
+            }
+        });
+
+        // Register form submission handler
+        document.getElementById('registerForm').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const formObject = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObject)
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    showModal(result.message || 'Registration successful');
+                    setTimeout(() => { window.location.href = 'login.html'; }, 1500);  // Redirect after 1.5 seconds
+                } else {
+                    const error = await response.json();
+                    showModal(error.message || 'Registration failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showModal('An unexpected error occurred. Please try again later.');
+            }
+        });
     </script>
 </body>
 </html>
