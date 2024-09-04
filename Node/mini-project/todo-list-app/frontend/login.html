@@ -132,8 +132,10 @@
                     // Store the token in localStorage
                     if (result.token) {
                         localStorage.setItem('authToken', result.token);
+                        localStorage.setItem('username', result.username);
+
                         showModal('Login successful');
-                        setTimeout(() => { window.location.href = 'home.html'; }, 1500);  // Redirect after 1.5 seconds
+                        setTimeout(() => { window.location.href = 'home.html'; }, 1500);  
                     } else {
                         showModal('Login failed: No token received');
                     }

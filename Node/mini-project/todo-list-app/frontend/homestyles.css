@@ -1,7 +1,7 @@
 /* General styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #eaeaea; /* Light grey for a subtle background */
+  background-color: #fff; /* Light grey for a subtle background */
   margin: 0;
   padding: 0;
 }
@@ -14,62 +14,134 @@ body {
 
 /* Header styles */
 header {
-  background-color: #f8bbd0; /* Baby pink mixed color */
-  color: white;
-  padding: 15px 0; /* Increased padding for a more attractive header */
+  background-color: rgb(184, 224, 184);
+  color: black; 
+  padding: 15px 0; 
 }
 
 .header-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: center; /* Align items vertically centered */
+  justify-content: space-between; /* Space between items */
+}
+
+.logo {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
 }
 
 .logo img {
-  height: 50px; /* Slightly increased logo size */
+  height: 50px; /* Logo size */
+  margin-right: 10px; /* Space between logo and title */
 }
 
-.search-bar input[type="text"] {
+.header-title {
+  font-size: 24px; /* Font size for the header title */
+  margin: 0; /* Remove default margin */
+  color: black; /* Text color for header title */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+
+#searchInput {
+  width: 300px;
   padding: 10px;
-  border: none;
+  border: 1px solid #ddd;
   border-radius: 5px 0 0 5px;
-  width: 200px; /* Increased width for better visibility */
-  font-size: 16px; /* Larger font size */
+  font-size: 16px;
+  background-color: rgb(249, 249, 249);
+  outline: none;
 }
 
-.search-bar button {
-  padding: 10px;
+#searchBtn {
+  padding: 10px 20px;
   border: none;
   border-radius: 0 5px 5px 0;
-  background-color: #ff5722; /* Vivid orange for contrast */
-  color: white;
+  background-color: #90c546;
+  color: rgb(19, 19, 19);
+  font-size: 16px;
   cursor: pointer;
-  font-size: 16px; /* Larger font size */
+  display: flex;
+  align-items: center;
 }
 
-.search-bar button:hover {
-  background-color: #e64a19; /* Slightly darker shade for hover */
+#searchBtn i {
+  margin-right: 8px;
+}
+
+#searchBtn:hover {
+  background-color: #668d34;
+}
+
+#searchInput::placeholder {
+  color: #7f8c8d;
 }
 
 /* User info dropdown styles */
 .user-info {
   display: flex;
   align-items: center;
+  position: relative;
 }
 
-.user-info span {
-  margin-right: 10px;
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-logo {
+  height: 30px; /* Adjust as needed */
+  width: 30px; /* Adjust as needed */
+  border-radius: 50%; /* Makes the logo circular */
+}
+
+#username {
+  color: rgb(248, 60, 60); /* Set the username color to black */
+  font-size: 16px; /* Font size for the username */
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  color: inherit; /* Ensure text color is inherited */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #fff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
 }
 
 .dropdown-content a {
-  color: #333;
-  padding: 10px;
+  color: black;
+  padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
 .dropdown-content a:hover {
-  background-color: #ddd;
+  background-color: #f1f1f1;
+}
+
+.user-info:hover .dropdown-content {
+  display: block;
 }
 
 /* Modal styles */
@@ -118,10 +190,19 @@ header {
   margin-bottom: 10px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.task-box:hover {
+  transform: translateY(-5px); /* Move the task box up slightly */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Increase shadow on hover */
 }
 
 .task-box h3 {
   margin-top: 0;
+}
+.task-box {
+  cursor: pointer;
 }
 
 /* Input field styles */
@@ -156,20 +237,167 @@ button[type="submit"] {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  font-size: 16px; /* Larger font size */
 }
 
 button[type="submit"]:hover {
   background-color: #e64a19; /* Slightly darker shade for hover */
 }
 
-/* Modal row styles */
-.modal-row {
-  display: flex;
-  justify-content: space-between;
+/* Tasks list and delete button styles */
+#tasksContainer {
+  margin-top: 20px;
 }
 
-.modal-row select, .modal-row input[type="date"] {
-  width: 32%;
+button#deleteSelectedBtn {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Larger font size */
+}
+
+button#deleteSelectedBtn:hover {
+  background-color: #c62828; /* Slightly darker shade for hover */
+}
+
+
+
+
+
+
+
+.task-box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-title {
+  margin-top: 0;
+  font-size: 1.6em;
+  color: #333;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif; /* Use a modern font family */
+}
+
+.task-buttons {
+  margin-top: 10px;
+}
+
+/* Base styles for the buttons */
+.edit-btn, .delete-btn {
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Edit button styles */
+.edit-btn {
+  background-color: rgb(62, 147, 226);
+  color: white;
+  border: none;
+  width: 120px; /* Slightly larger for better visual appeal */
+  padding: 10px 15px;
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Delete button styles */
+.delete-btn {
+  background-color: rgb(247, 79, 79);
+  color: white;
+  border: none;
+  width: 120px; /* Slightly larger for better visual appeal */
+  padding: 10px 15px;
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effects for both buttons */
+.edit-btn:hover  {
+  background-color: #117cc8; /* Slightly lighter blue for edit button on hover */
+  transform: translateY(-2px); /* Lift the button slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+.delete-btn:hover{
+  background-color: rgb(241, 30, 30); /* Slightly lighter blue for edit button on hover */
+  transform: translateY(-2px); /* Lift the button slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+/* Focus effect for accessibility */
+.edit-btn:focus, .delete-btn:focus {
+  outline: 3px solid #000; /* Add a visible focus outline */
+}
+
+
+
+
+
+#openModalBtn {
+  background-color: rgb(203, 220, 198);
+  color: rgb(32, 32, 32);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-logo {
+  width: 20px; /* Adjust as needed */
+  height: auto;
+  margin-right: 8px; /* Space between logo and text */
+}
+
+#openModalBtn:hover {
+  background-color: #848586; /* Slightly lighter blue on hover */
+  transform: translateY(-2px); /* Lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+
+#tasksHeading {
+  text-align: center;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Styling for labels (e.g., Title, Description, etc.) */
+.label {
+  color: #FF5722; /* Green color for labels */
+  font-weight: bold;
+}
+
+/* Styling for user-provided values */
+.value {
+  color: #406441; /* Orange color for values */
+  
+}
+
+
+
+#username {
+  padding-right: 20px; /* Add some padding to the right */
+  padding-left: 10px;  /* Optional: Add padding to the left */
+  font-size: 17px;     /* Optional: Adjust font size */
+  color: #2b2b2b;         /* Optional: Customize text color */
 }
