@@ -17,7 +17,7 @@ router.delete('/delete/:postId', authenticateToken, deletePostById);
 
 router.get('/search', authenticateToken, searchposts);
 
-router.post('/addcategory', authenticateToken,createCategory  );
+router.post('/addcategory', authenticateToken,createCategory);
 
 router.get('/getpostsbyuser', authenticateToken,  getPostsByUser);
 

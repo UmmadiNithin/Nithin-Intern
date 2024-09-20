@@ -4,12 +4,29 @@ const Categories=require('../models/category');
 const  User= require('../models/user');
 const { post } = require('../routes/authRoutes');
 const { Op } = require('sequelize'); 
+const { createPostSchema, updatePostSchema,searchPostSchema } = require('../validations/postvalidations'); 
 
 
 
 const createPost = async (req, res) => {
     try {
         const { title, description, categoryId } = req.body; 
+
+        const { error } = createPostSchema.validate({
+            title,
+            description,
+            categoryId,
+            image: req.files ? req.files.image : null  
+        });
+
+        if (error) {
+            return res.status(400).json({
+                result: {},
+                message: error.details[0].message,
+                status: 'error',
+                responseCode: 400
+            });
+        }
 
         if (!req.files || !req.files.image) {
             return res.status(400).json({
@@ -29,7 +46,7 @@ const createPost = async (req, res) => {
             title: title,
             description: description,
             image: imageBuffer,
-            categoryId: categoryId  
+            categoryId: categoryId
         });
 
         return res.status(201).json({
@@ -48,7 +65,6 @@ const createPost = async (req, res) => {
         });
     }
 };
-
 
 const getAllPosts = async (req, res) => {
     try {
@@ -127,13 +143,28 @@ const getPostById = async (req, res) => {
 };
 
 
-
 const editPostById = async (req, res) => {
     try {
         const { postId } = req.params;
-        const { title, description } = req.body;
+        const { id: userId } = req.user;
+        const { title, description, categoryId } = req.body;
         const imageFile = req.files?.image;
-        const { id: userId } = req.user; 
+
+        const { error } = updatePostSchema.validate({
+            title,
+            description,
+            categoryId,
+            image: imageFile
+        });
+
+        if (error) {
+            return res.status(400).json({
+                result: {},
+                message: error.details[0].message,
+                status: 'error',
+                responseCode: 400
+            });
+        }
 
         const post = await Post.findByPk(postId);
 
@@ -157,6 +188,7 @@ const editPostById = async (req, res) => {
 
         if (title) post.title = title;
         if (description) post.description = description;
+        if (categoryId) post.categoryId = categoryId;
         if (imageFile) {
             const base64Image = imageFile.data.toString('base64');
             post.image = Buffer.from(base64Image, 'base64');
@@ -180,8 +212,6 @@ const editPostById = async (req, res) => {
         });
     }
 };
-
-
 const deletePostById = async (req, res) => {
     try {
         const { postId } = req.params;
@@ -285,21 +315,22 @@ const Likes_and_Comment = async (req, res) => {
     }
 };
 
-
-
 const searchposts = async (req, res) => {
-    const { title } = req.query; 
+    const { title } = req.query;
 
-    if (!title) {
+    const { error } = searchPostSchema.validate({ title });
+
+    if (error) {
         return res.status(400).json({
             result: {},
-            message: 'Title is required to search',
+            message: error.details[0].message,
             status: 'error',
             responseCode: 400
         });
     }
 
     try {
+      
         const exactMatchPost = await Post.findOne({ 
             where: {
                 title: {
@@ -343,8 +374,6 @@ const searchposts = async (req, res) => {
         });
     }
 };
-
-
 const getLikesAndCommentsCounts = async (req, res) => {
     try {
         const { postId } = req.params;
@@ -395,7 +424,6 @@ const getLikesAndCommentsCounts = async (req, res) => {
         });
     }
 };
-
 
 
 const createCategory = async (req, res) => {
