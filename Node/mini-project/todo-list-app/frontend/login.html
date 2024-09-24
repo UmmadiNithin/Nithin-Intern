@@ -48,7 +48,7 @@
             color: #333;
         }
         .modal-button {
-            background-color: #5CB85C;
+            background-color: rgb(42, 130, 130);
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -58,19 +58,39 @@
             margin-top: 20px;
         }
         .modal-button:hover {
-            background-color: #4A9E4A;
+            background-color: rgb(34, 97, 97);
         }
+body {
+    background: linear-gradient(135deg, #008080, #00C9A7, #00FFCC, #003366);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    color: #333;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Animation to create a smooth gradient transition */
+@keyframes gradientBackground {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+#button {
+background-color: rgb(42, 130, 130);
+}
+
     </style>
 </head>
 <body>
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Welcome!</h2>
+        <h4 style="color: rgb(102, 100, 100);">Nice to see you again!</h4>
         <form id="loginForm" action="/api/auth/login" method="POST">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Login</button>
+            <button type="submit" id="button">Login</button>
         </form>
-        <p>Don't have an account? <a href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/register.html">Register here</a></p>
+        <p>Don't have an account? <a href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/register.html"><span style="color: rgb(42, 130, 130);">Register here</span></a></p>
     </div>
 
     <!-- Modal for messages -->
@@ -82,8 +102,13 @@
         </div>
     </div>
 
-    <script>
-        // Function to show the modal with a message
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            if(localStorage.getItem('authToken')){
+                window.location.href='home.html'
+            }
+            else{
+                 // Function to show the modal with a message
         function showModal(message) {
             document.getElementById('modalMessage').innerText = message;
             document.getElementById('messageModal').style.display = 'block';
@@ -148,6 +173,11 @@
                 showModal('An unexpected error occurred. Please try again later.');
             }
         });
-    </script>
+                
+            }
+        })
+       
+    </script> -->
+<script src="./main.js"></script>
 </body>
 </html>

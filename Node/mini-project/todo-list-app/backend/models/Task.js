@@ -2,7 +2,7 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 const User = require('./User');
 
-// Define the Task model
+
 const Task = sequelize.define('Task', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
@@ -21,7 +21,7 @@ const Task = sequelize.define('Task', {
     updatedAt: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
 });
 
-// Set up associations
+
 Task.belongsTo(User, { foreignKey: 'userId' });
 User.hasMany(Task, { foreignKey: 'userId' });
 

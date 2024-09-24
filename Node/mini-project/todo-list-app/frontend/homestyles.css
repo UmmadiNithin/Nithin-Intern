@@ -7,22 +7,26 @@ body {
 }
 
 .container {
-  width: 80%;
+  width: 83%;
   margin: auto;
   padding: 20px;
 }
 
-/* Header styles */
-header {
-  background-color: rgb(184, 224, 184);
-  color: black; 
-  padding: 15px 0; 
+#header {
+  background: linear-gradient(135deg, #003366, #00FFCC);
+  color: #FFFFFF; /* Light text color for contrast */
+  padding: 15px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow for depth */
+  height: 70px;
 }
-
+/* Container within header */
 .header-container {
   display: flex;
   align-items: center; /* Align items vertically centered */
   justify-content: space-between; /* Space between items */
+  max-width: 1200px; /* Optional: Set a max width for the container */
+  margin: 0 auto; /* Center the container within the header */
+  padding: 0 20px; /* Optional: Add horizontal padding */
 }
 
 .logo {
@@ -38,49 +42,67 @@ header {
 .header-title {
   font-size: 24px; /* Font size for the header title */
   margin: 0; /* Remove default margin */
-  color: black; /* Text color for header title */
+  color: #E0F7FA; /* Light cyan color for better contrast and style */
+  font-family: 'Roboto', sans-serif; /* Modern and clean font family */
+  font-weight: 700; /* Bold font weight for emphasis */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  letter-spacing: 1px; /* Slightly increased letter spacing for readability */
+  line-height: 1.2; /* Line height to improve text spacing */
 }
 
 .search-bar {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin: 20px auto;
 }
 
 #searchInput {
   width: 300px;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px 0 0 5px;
+  padding: 12px 20px;
+  border: 1px solid #00C9A7; /* Light cyan border for a subtle touch */
+  border-radius: 25px; /* Fully rounded corners for a sleek look */
   font-size: 16px;
-  background-color: rgb(249, 249, 249);
+  background-color: #fff; /* Light cyan background for a fresh, clean look */
+  color: #003366; /* Dark blue text for readability */
   outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#searchInput:focus {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow on focus */
+  border-color: #00FFCC; /* Brighter cyan border on focus */
+  background-color: #B2EBF2; /* Slightly darker cyan for focus state */
 }
 
 #searchBtn {
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
-  border-radius: 0 5px 5px 0;
-  background-color: #90c546;
-  color: rgb(19, 19, 19);
+  border-radius: 25px; /* Fully rounded corners to match the input */
+  background: linear-gradient(135deg, #00FFCC, #00C9A7); /* Gradient to match header */
+  color: #003366; /* Dark blue text for contrast */
   font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for button */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 #searchBtn i {
-  margin-right: 8px;
+  margin-right: 8px; /* Space between icon and text */
 }
 
 #searchBtn:hover {
-  background-color: #668d34;
+  background: linear-gradient(135deg, #00C9A7, #00FFCC); /* Inverted gradient for hover effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
 }
 
 #searchInput::placeholder {
-  color: #7f8c8d;
+  color: #00796B; /* Darker cyan placeholder text for readability */
 }
+
 
 /* User info dropdown styles */
 .user-info {
@@ -102,8 +124,11 @@ header {
 }
 
 #username {
-  color: rgb(248, 60, 60); /* Set the username color to black */
-  font-size: 16px; /* Font size for the username */
+  padding-right: 20px; /* Add some padding to the right */
+  padding-left: 10px;  /* Optional: Add padding to the left */
+  font-size: 17px;     /* Optional: Adjust font size */
+  color: #292828;
+ font-family:Georgia, 'Times New Roman', Times, serif
 }
 
 .dropdown {
@@ -119,25 +144,38 @@ header {
   color: inherit; /* Ensure text color is inherited */
 }
 
+
+
+
 .dropdown-content {
   display: none;
   position: absolute;
   right: 0;
-  background-color: #fff;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  top:30px;
+  background-color: #fff; /* Light background color */
+  min-width: 180px; /* Slightly wider for a more spacious feel */
+  border-radius: 10px; /* Rounded corners for a smoother look */
+  border: 1px solid #e2e8f0; /* Subtle border */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: black;
-  padding: 12px 16px;
+  color: #2d3748; /* Darker gray for text color */
+  padding: 14px 18px; /* More padding for comfortable spacing */
   text-decoration: none;
   display: block;
+  font-weight: 500; /* Slightly bolder text */
+  border-bottom: 1px solid #e2e8f0; /* Divider between items */
 }
 
 .dropdown-content a:hover {
-  background-color: #f1f1f1;
+  background-color: #edf2f7; /* Light hover color */
+  color: #1a202c; /* Darker text on hover */
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none; /* Remove the last border */
 }
 
 .user-info:hover .dropdown-content {
@@ -226,7 +264,7 @@ header {
 }
 
 #taskStatus, #taskDueDate, #taskPriority {
-  background-color: #fce4ec; /* Light pink */
+  background-color: #ffecf7; /* Light pink */
 }
 
 /* Add Task button styles */
@@ -344,8 +382,8 @@ button#deleteSelectedBtn:hover {
 
 
 #openModalBtn {
-  background-color: rgb(203, 220, 198);
-  color: rgb(32, 32, 32);
+  background: linear-gradient(135deg, #002147, #004d69, #007a8a, #006e6f); /* Darker gradient */
+  color: #FFFFFF; /* White text for contrast */
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -354,7 +392,8 @@ button#deleteSelectedBtn:hover {
   align-items: center;
   font-size: 1em;
   font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease; /* Adjusted transition effects */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly deeper shadow for depth */
 }
 
 .btn-logo {
@@ -364,9 +403,9 @@ button#deleteSelectedBtn:hover {
 }
 
 #openModalBtn:hover {
-  background-color: #848586; /* Slightly lighter blue on hover */
-  transform: translateY(-2px); /* Lift effect */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  background: linear-gradient(135deg, #004d69, #007a8a, #006e6f, #002147); /* Darker gradient on hover */
+  transform: scale(1.02); /* Slightly smaller scale effect on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
 }
 
 
@@ -383,21 +422,52 @@ button#deleteSelectedBtn:hover {
 
 /* Styling for labels (e.g., Title, Description, etc.) */
 .label {
-  color: #FF5722; /* Green color for labels */
+  color: #181718; /* Green color for labels */
   font-weight: bold;
 }
 
+
 /* Styling for user-provided values */
 .value {
-  color: #406441; /* Orange color for values */
+  color: #4d654e; /* Orange color for values */
   
 }
 
 
 
-#username {
-  padding-right: 20px; /* Add some padding to the right */
-  padding-left: 10px;  /* Optional: Add padding to the left */
-  font-size: 17px;     /* Optional: Adjust font size */
-  color: #2b2b2b;         /* Optional: Customize text color */
+.filter-container {
+  display: flex;
+  align-items: center; /* Vertically center the label and dropdown */
+  margin-right: 20px; /* Add space to the right to avoid overlap */
 }
+
+.filter-container label {
+  margin-right: 10px; /* Space between label and dropdown */
+  font-size: 16px; /* Adjust font size for readability */
+  font-weight: bold; /* Make the font bold */
+  color: #003366; /* Dark blue color for consistency with header */
+}
+
+.filter-dropdown {
+  padding: 8px;
+  border: 1px solid #00C9A7; /* Light cyan border to match the header */
+  border-radius: 25px; /* Rounded corners for a modern look */
+  background-color: #fff; /* Light cyan background for freshness */
+  color: #003366; /* Dark blue text for contrast */
+  font-size: 16px; /* Consistent font size */
+  font-weight: bold; /* Bold text for improved visibility */
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+.filter-dropdown:focus {
+  border-color: #fff; /* Brighter cyan border on focus */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on focus */
+}
+
+
+
+
+
+

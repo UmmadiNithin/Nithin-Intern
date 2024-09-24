@@ -48,7 +48,7 @@
             color: #333;
         }
         .modal-button {
-            background-color: #5CB85C;
+            background-color: rgb(42, 130, 130);
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -58,8 +58,28 @@
             margin-top: 20px;
         }
         .modal-button:hover {
-            background-color: #4A9E4A;
+            background-color: rgb(34, 97, 97);
         }
+        body {
+    background: linear-gradient(135deg, #008080, #00C9A7, #00FFCC, #003366);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
+    color: #333;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Animation to create a smooth gradient transition */
+@keyframes gradientBackground {
+    0% { background-position: 0% 0%; }
+    50% { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+#button {
+background-color: rgb(42, 130, 130);
+}
+
+
     </style>
 </head>
 <body>
@@ -69,9 +89,9 @@
             <input type="text" name="name" placeholder="Name" required>
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Register</button>
+            <button type="submit" id="button">Register</button>
         </form>
-        <p>Already have an account? <a href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/login.html">Login here</a></p>
+        <p>Already have an account? <a href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/login.html"><span style="color: rgb(42, 130, 130);">Login here</span></a></p>
     </div>
 
     <!-- Modal for messages -->
@@ -84,7 +104,7 @@
     </div>
 
     <script>
-        // Function to show the modal with a message
+        
         function showModal(message) {
             document.getElementById('modalMessage').innerText = message;
             document.getElementById('messageModal').style.display = 'block';
@@ -92,7 +112,7 @@
             document.querySelector('.modal-content').style.transform = 'scale(1)';
         }
 
-        // Function to hide the modal
+       
         function closeModal() {
             document.getElementById('messageModal').style.opacity = '0';
             document.querySelector('.modal-content').style.transform = 'scale(0.9)';
@@ -101,7 +121,7 @@
             }, 300);
         }
 
-        // Event listener for modal close button
+       
         document.getElementById('closeModal').addEventListener('click', closeModal);
         document.getElementById('modalButton').addEventListener('click', closeModal);
 
@@ -111,7 +131,7 @@
             }
         });
 
-        // Register form submission handler
+    
         document.getElementById('registerForm').addEventListener('submit', async function (event) {
             event.preventDefault();
 

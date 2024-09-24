@@ -1,7 +1,7 @@
 const Task = require('../models/Task');
 const { Op } = require('sequelize');
 
-// Define valid values for status and priority
+
 const validStatuses = ['TODO', 'IN_PROGRESS', 'DONE']; 
 const validPriorities = ['LOW', 'MEDIUM', 'HIGH']; 
 
@@ -11,12 +11,11 @@ exports.createTask = async (req, res) => {
         const { title, description, status, dueDate, priority, isPinned } = req.body;
         console.log(req.body);
         
-        // Validate required fields
+      
         if (!title || !dueDate) {
             return res.status(400).json({ error: 'Title and due date are required' });
         }
 
-        // Validate status and priority
         if (!validStatuses.includes(status)) {
             return res.status(400).json({ error: `Invalid status value. Allowed values are ${validStatuses.join(', ')}` });
         }
@@ -31,7 +30,6 @@ exports.createTask = async (req, res) => {
 
         console.log("Creating new task..."); 
 
-        // Create a new task with the user's ID
         const newTask = await Task.create({ 
             title, 
             description, 
@@ -51,10 +49,19 @@ exports.createTask = async (req, res) => {
     }
 };
 
-// Get all tasks for the current user
 exports.getTasks = async (req, res) => {
     try {
-        const tasks = await Task.findAll({ where: { userId: req.user.id } });
+        const userId = req.user.id;
+        const { priority } = req.query;
+
+        const whereCondition = { userId };
+        
+        if (priority && validPriorities.includes(priority.toUpperCase())) {
+            whereCondition.priority = priority.toUpperCase(); 
+        }
+
+        const tasks = await Task.findAll({ where: whereCondition });
+
         return res.status(200).json(tasks);
     } catch (error) {
         console.error('Error fetching tasks:', error);
@@ -62,7 +69,7 @@ exports.getTasks = async (req, res) => {
     }
 };
 
-// Get a specific task for the current user
+
 exports.getsingleTask = async (req, res) => {
     try {
         const taskId = req.params.id; 
@@ -90,13 +97,11 @@ exports.updateTask = async (req, res) => {
         const { id } = req.params;
         const { title, description, status, dueDate, priority, isPinned } = req.body;
 
-        // Find the task to update
         const existingTask = await Task.findOne({ where: { id, userId: req.user.id } });
         if (!existingTask) {
             return res.status(404).json({ message: 'Task not found' });
         }
 
-        // Validate status and priority
         if (status && !validStatuses.includes(status)) {
             return res.status(400).json({ error: `Invalid status value. Allowed values are ${validStatuses.join(', ')}` });
         }
@@ -104,12 +109,10 @@ exports.updateTask = async (req, res) => {
             return res.status(400).json({ error: `Invalid priority value. Allowed values are ${validPriorities.join(', ')}` });
         }
 
-        // Validate date format
         if (dueDate && isNaN(Date.parse(dueDate))) {
             return res.status(400).json({ error: 'Invalid date format' });
         }
 
-        // Update the task details
         const updatedTask = await existingTask.update({ 
             title, 
             description, 
@@ -131,13 +134,11 @@ exports.deleteTask = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Find the task to delete
         const task = await Task.findOne({ where: { id, userId: req.user.id } });
         if (!task) {
             return res.status(404).json({ message: 'Task not found' });
         }
          
-        // Delete the task
         await task.destroy();
         return res.status(200).json({ status: 'Task deleted' });  
 
@@ -151,7 +152,7 @@ exports.deleteTask = async (req, res) => {
 
 // Search tasks by title
 exports.searchTasks = async (req, res) => {
-    const { title } = req.query; // Get the search query from the URL
+    const { title } = req.query; 
 console.log(title);
 
     if (!title) {
@@ -159,26 +160,22 @@ console.log(title);
     }
 
     try {
-        // Find tasks where the title matches exactly
         const exactMatchTask = await Task.findOne({
             where: {
                 title: {
-                    [Op.iLike]: title  // Case-insensitive exact match
+                    [Op.iLike]: title  
                 }
             }
         });
 
-        // Find tasks where the title contains the search term (partial match)
         const relatedTasks = await Task.findAll({
             where: {
                 title: {
-                    [Op.iLike]: `%${title}%`  // Case-insensitive partial match
+                    [Op.iLike]: `%${title}%`  
                 }
             },
-            order: [['createdAt', 'DESC']] // Order by creation date (optional)
         });
 
-        // If exact match is found, prioritize it and remove from related tasks
         if (exactMatchTask) {
             return res.json({
                 exactMatch: exactMatchTask,
@@ -186,7 +183,6 @@ console.log(title);
             });
         }
 
-        // Return only related tasks if no exact match is found
         return res.json({ relatedTasks });
 
     } catch (err) {
