@@ -6,8 +6,10 @@ const {
   deleteUserAccount, 
   changeUserEmail, 
   changeUserPassword,
-  getUserProfile 
- 
+  getUserProfile,
+  forgotPassword,
+  resetPassword
+
 } = require('../controllers/userController');
 const authenticateToken = require('../middlewares/authMiddleware');
 const validationMiddleware = require('../middlewares/validationMiddleware');
@@ -21,7 +23,7 @@ router.patch('/changePassword', authenticateToken, validationMiddleware, changeU
 router.patch('/changeEmail', authenticateToken, validationMiddleware, changeUserEmail);
 router.delete('/deleteUser', authenticateToken, deleteUserAccount);
 router.get('/profile', authenticateToken, getUserProfile);
-
-
+router.post('/forgotPassword', validationMiddleware, forgotPassword);
+router.post('/resetPassword', validationMiddleware, resetPassword);
 
 module.exports = router;

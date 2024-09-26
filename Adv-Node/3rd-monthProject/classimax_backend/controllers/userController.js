@@ -1,26 +1,12 @@
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const userSchema = require('../modals/userModel');
 
+const userService = require('../services/userService');
+const sendEmail = require('../utils/sendEmail');
 
 exports.registerUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const existingUser = await userSchema.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({
-        result: {},
-        message: 'User already exists',
-        status: 'error',
-        responseCode: 400,
-      });
-    }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new userSchema({ email, password: hashedPassword });
-    await user.save();
-
+    const user = await userService.registerUser(email, password);
     return res.status(201).json({
       result: user,
       message: 'User registered successfully',
@@ -28,12 +14,11 @@ exports.registerUser = async (req, res) => {
       responseCode: 201,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(400).json({
       result: {},
-      message: 'Server error',
+      message: err.message,
       status: 'error',
-      responseCode: 500,
-      error: err.message,
+      responseCode: 400,
     });
   }
 };
@@ -42,32 +27,7 @@ exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const user = await userSchema.findOne({ email });
-    if (!user) {
-      return res.status(400).json({
-        result: {},
-        message: 'Invalid email or password',
-        status: 'error',
-        responseCode: 400,
-      });
-    }
-
-    const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) {
-      return res.status(400).json({
-        result: {},
-        message: 'Invalid email or password',
-        status: 'error',
-        responseCode: 400,
-      });
-    }
-
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET || 'secretkey',
-      { expiresIn: '12h' }
-    );
-
+    const token = await userService.loginUser(email, password);
     return res.status(200).json({
       result: { token },
       message: 'Logged in successfully',
@@ -75,40 +35,22 @@ exports.loginUser = async (req, res) => {
       responseCode: 200,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(400).json({
       result: {},
-      message: 'Server error',
+      message: err.message,
       status: 'error',
-      responseCode: 500,
-      error: err.message,
+      responseCode: 400,
     });
   }
 };
 
 exports.updateUserProfile = async (req, res) => {
   const { firstName, lastName, community_name, zipCode, phone_No, address } = req.body;
+  const userId = req.user.id;
+  const updateData = { firstName, lastName, community_name, zipCode, phone_No, address };
 
   try {
-    const updateData = {};
-    if (firstName) updateData.firstName = firstName;
-    if (lastName) updateData.lastName = lastName;
-    if (community_name) updateData.community_name = community_name;
-    if (zipCode) updateData.zipCode = zipCode;
-    if (phone_No) updateData.phone_No = phone_No;
-    if (address) updateData.address = address;
-    updateData.updated_at = Date.now();
-
-   if (req.files && req.files.image) {
-    const file = req.files.image;
-    const base64Image = file.data.toString('base64');
-    updateData.image = base64Image; 
-}
-
-
-    const userId = req.user.id; 
-
-    const updatedUser = await userSchema.findByIdAndUpdate(userId, updateData, { new: true });
-
+    const updatedUser = await userService.updateUserProfile(userId, updateData, req.files?.image);
     return res.status(200).json({
       result: updatedUser,
       message: 'Profile updated successfully',
@@ -116,46 +58,21 @@ exports.updateUserProfile = async (req, res) => {
       responseCode: 200,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(400).json({
       result: {},
-      message: 'Server error',
+      message: err.message,
       status: 'error',
-      responseCode: 500,
-      error: err.message,
+      responseCode: 400,
     });
   }
 };
 
 exports.changeUserPassword = async (req, res) => {
   const { oldPassword, newPassword } = req.body;
+  const userId = req.user.id;
 
   try {
-    const userId = req.user.id; 
-
-    const user = await userSchema.findById(userId);
-    if (!user) {
-      return res.status(404).json({
-        result: {},
-        message: 'User not found',
-        status: 'error',
-        responseCode: 404,
-      });
-    }
-
-    const validPassword = await bcrypt.compare(oldPassword, user.password);
-    if (!validPassword) {
-      return res.status(400).json({
-        result: {},
-        message: 'Old password is incorrect',
-        status: 'error',
-        responseCode: 400,
-      });
-    }
-
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    await user.save();
-
+    await userService.changeUserPassword(userId, oldPassword, newPassword);
     return res.status(200).json({
       result: {},
       message: 'Password changed successfully',
@@ -163,64 +80,40 @@ exports.changeUserPassword = async (req, res) => {
       responseCode: 200,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(400).json({
       result: {},
-      message: 'Server error',
+      message: err.message,
       status: 'error',
-      responseCode: 500,
-      error: err.message,
+      responseCode: 400,
     });
   }
 };
 
-
 exports.changeUserEmail = async (req, res) => {
   const { currentEmail, newEmail } = req.body;
+  const userId = req.user.id;
 
   try {
-    const userId = req.user.id; 
-
-    const user = await userSchema.findById(userId);
-    if (!user || user.email !== currentEmail) {
-      return res.status(400).json({
-        message: 'Current email does not match our records',
-        status: 'error',
-        responseCode: 400,
-      });
-    }
-
-    const existingEmail = await userSchema.findOne({ email: newEmail });
-    if (existingEmail) {
-      return res.status(400).json({
-        message: 'Email already in use',
-        status: 'error',
-        responseCode: 400,
-      });
-    }
-
-    await userSchema.findByIdAndUpdate(userId, { email: newEmail }, { new: true });
-
+    await userService.changeUserEmail(userId, currentEmail, newEmail);
     return res.status(200).json({
       message: 'Email updated successfully',
       status: 'success',
       responseCode: 200,
     });
   } catch (err) {
-    return res.status(500).json({
-      message: 'Server error',
+    return res.status(400).json({
+      message: err.message,
       status: 'error',
-      responseCode: 500,
-      error: err.message,
+      responseCode: 400,
     });
   }
 };
 
 exports.deleteUserAccount = async (req, res) => {
+  const userId = req.user.id;
+
   try {
-    const userId = req.user.id; 
-
-    await userSchema.findByIdAndDelete(userId);
-
+    await userService.deleteUserAccount(userId);
     return res.status(200).json({
       result: {},
       message: 'Account deleted successfully',
@@ -238,42 +131,67 @@ exports.deleteUserAccount = async (req, res) => {
   }
 };
 
-
 exports.getUserProfile = async (req, res) => {
+  const userId = req.user.id;
+
   try {
-    const userId = req.user.id; 
-
-    const user = await userSchema.findById(userId).select('-password');
-
-    if (!user) {
-      return res.status(404).json({
-        result: {},
-        message: 'User not found',
-        status: 'error',
-        responseCode: 404,
-      });
-    }
-
-    const userProfileWithBase64Image = {
-      ...user.toObject(),
-      image: user.image ? user.image.toString('base64') : null, 
-    };
-   
+    const userProfile = await userService.getUserProfile(userId);
     return res.status(200).json({
-      result: userProfileWithBase64Image,
+      result: userProfile,
       message: 'User profile fetched successfully',
       status: 'success',
       responseCode: 200,
     });
   } catch (err) {
-    return res.status(500).json({
+    return res.status(404).json({
       result: {},
-      message: 'Server error',
+      message: err.message,
       status: 'error',
-      responseCode: 500,
-      error: err.message,
+      responseCode: 404,
     });
   }
 };
 
+exports.forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const otpData = await userService.forgotPassword(email);
+    await sendEmail(email, 'Password Reset OTP', `Your OTP is ${otpData.otp}. It will expire in 10 minutes.`);
+    return res.status(200).json({
+      message: 'OTP sent to your email',
+      status: 'success',
+      responseCode: 200,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: err.message,
+      status: 'error',
+      responseCode: 404,
+    });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body; 
+    
+    if (typeof otp !== 'string' && typeof otp !== 'number') {
+      throw new Error('Invalid OTP format');
+    }
+
+    await userService.resetPassword(email, otp, newPassword);
+    return res.status(200).json({
+      message: 'Password reset successfully',
+      status: 'success',
+      responseCode: 200,
+    });
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+      status: 'error',
+      responseCode: 400,
+    });
+  }
+};
 
