@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        div {
+            margin-right: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+        }
+    </style>
+    <script>
+        function getValues() {
+            var num1 = parseFloat(document.getElementById("num1").value);
+            var num2 = parseFloat(document.getElementById("num2").value);
+            return [num1, num2];
+        }
+
+        function addition() {
+            var [num1, num2] = getValues();
+            var result = num1 + num2;
+            document.getElementById("result").innerHTML = "The result of " + num1 + " and " + num2 + " is: " + result;
+        }
+
+        function subtraction() {
+            var [num1, num2] = getValues();
+            var result = num1 - num2;re
+            document.getElementById("result").innerHTML = "The result of " + num1 + " and " + num2 + " is: " + result;
+        }
+
+        function multiplication() {
+            var [num1, num2] = getValues();
+            var result = num1 * num2;
+            document.getElementById("result").innerHTML = "The result of " + num1 + " and " + num2 + " is: " + result;
+        }
+
+        function division() {
+            var [num1, num2] = getValues();
+            if (num2 === 0) {
+                document.getElementById("result").innerHTML = "Division by zero is not allowed.";
+            } else {
+                var result = num1 / num2;
+                document.getElementById("result").innerHTML = "The result of " + num1 + " and " + num2 + " is: " + result;
+            }
+        }
+    </script>
+</head> 
+
+<body>
+    <h1 align="center">CALCULATOR</h1>
+    <form>
+        <div>
+            <label>Enter first number:</label><br>
+            <input type="number" id="num1"><br>
+        </div>
+        <div>
+            <label>Enter second number:</label><br>
+            <input type="number" id="num2"><br><br>
+        </div>
+        <h4>Select your operation:</h4>
+        <button type="button" onclick="addition()">Addition</button>
+        <button type="button" onclick="subtraction()">Subtraction</button>
+        <button type="button" onclick="multiplication()">Multiplication</button>
+        <button type="button" onclick="division()">Division</button>
+    </form>
+    <p id="result"></p>
+</body>
+</html>

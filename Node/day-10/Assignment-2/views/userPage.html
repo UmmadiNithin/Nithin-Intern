@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #111111, #f6ca2d); /* Gradient background */
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin-top: 2rem;
+      padding: 2rem;
+      background-color: #ebebeb;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(46, 46, 46, 0.1);
+    }
+    .table td, .table th {
+      vertical-align: middle;
+    }
+    .form-control, .btn {
+      border-radius: 0.5rem;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .btn-secondary {
+      background-color: rgb(236, 85, 85);
+      border-color: #6c757d;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .btn-secondary:hover {
+      background-color:darkred;
+      border-color: #545b62;
+    }
+    .welcome-message {
+      margin-bottom: 2rem;
+    }
+    /* Modal Styling */
+    .modal-content {
+      border-radius: 0.75rem;
+    }
+    .modal-header {
+      border-bottom: none;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+    }
+    .emoji {
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="welcome-message">Welcome, <span id="username"></span> </h1>
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <th>Email</th>
+              <td id="email"></td>
+            </tr>
+            <tr>
+              <th>Phone Number</th>
+              <td id="phone_no"></td>
+            </tr>
+            <tr>
+              <th>Address</th>
+              <td id="address"></td>
+            </tr>
+            <tr>
+              <th>Department</th>
+              <td id="department"></td>
+            </tr>
+            <tr>
+                <th>Institution</th>
+                <td id="institution"></td>
+              </tr>
+            </tbody>
+          </table>
+          <form action="/user/update" method="POST" class="mt-4">
+            <div class="form-group">
+              <label for="new_email">New Email</label>
+              <input type="email" name="email" id="new_email" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="new_phone_no">New Phone Number</label>
+              <input type="text" name="phone_no" id="new_phone_no" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="new_address">New Address</label>
+              <textarea name="address" id="new_address" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="new_department">New Department</label>
+              <input type="text" name="department" id="new_department" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="new_institution">New Institution</label>
+                <input type="text" name="institution" id="new_institution" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Update</button>
+            </form>
+            <div class="text-center mt-3">
+              <button class="btn btn-secondary" data-toggle="modal" data-target="#logoutModal">Logout </button>
+            </div>
+          </div>
+        
+          <!-- Logout Confirmation Modal -->
+          <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logoutModalLabel">Logout Confirmation <span class="emoji">⚠</span></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure you want to logout?
+                  </div>
+                  <div class="modal-footer">
+                    <a href="/auth/logout" class="btn btn-primary">Logout</a>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+          
+            <script>
+             
+              console.log('Attempting to fetch user data from /user/data');
+          
+              fetch('/user/data')
+                .then(response => {
+                  console.log('Fetch response status:', response.status);
+                  if (!response.ok) {
+                    console.error('Fetch failed with status:', response.status);
+                    throw new Error('Network response was not ok');
+                  }
+                  return response.json();
+                })
+                .then(user => {
+        console.log('User data received:', user);
+        document.getElementById('username').innerText = user.username;
+        document.getElementById('email').innerText = user.email;
+        document.getElementById('phone_no').innerText = user.phone_no || '';
+        document.getElementById('address').innerText = user.address || '';
+        document.getElementById('department').innerText = user.department || '';
+        document.getElementById('institution').innerText = user.institution || '';
+      })
+      .catch(error => console.error('Error fetching user data:', error));
+  </script>
+</body>
+</html>                                      

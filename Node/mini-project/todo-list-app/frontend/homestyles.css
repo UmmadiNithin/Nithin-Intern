@@ -1,0 +1,473 @@
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff; /* Light grey for a subtle background */
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 83%;
+  margin: auto;
+  padding: 20px;
+}
+
+#header {
+  background: linear-gradient(135deg, #003366, #00FFCC);
+  color: #FFFFFF; /* Light text color for contrast */
+  padding: 15px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: adds a subtle shadow for depth */
+  height: 70px;
+}
+/* Container within header */
+.header-container {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+  justify-content: space-between; /* Space between items */
+  max-width: 1200px; /* Optional: Set a max width for the container */
+  margin: 0 auto; /* Center the container within the header */
+  padding: 0 20px; /* Optional: Add horizontal padding */
+}
+
+.logo {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+}
+
+.logo img {
+  height: 50px; /* Logo size */
+  margin-right: 10px; /* Space between logo and title */
+}
+
+.header-title {
+  font-size: 24px; /* Font size for the header title */
+  margin: 0; /* Remove default margin */
+  color: #E0F7FA; /* Light cyan color for better contrast and style */
+  font-family: 'Roboto', sans-serif; /* Modern and clean font family */
+  font-weight: 700; /* Bold font weight for emphasis */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  letter-spacing: 1px; /* Slightly increased letter spacing for readability */
+  line-height: 1.2; /* Line height to improve text spacing */
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+#searchInput {
+  width: 300px;
+  padding: 12px 20px;
+  border: 1px solid #00C9A7; /* Light cyan border for a subtle touch */
+  border-radius: 25px; /* Fully rounded corners for a sleek look */
+  font-size: 16px;
+  background-color: #fff; /* Light cyan background for a fresh, clean look */
+  color: #003366; /* Dark blue text for readability */
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#searchInput:focus {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow on focus */
+  border-color: #00FFCC; /* Brighter cyan border on focus */
+  background-color: #B2EBF2; /* Slightly darker cyan for focus state */
+}
+
+#searchBtn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px; /* Fully rounded corners to match the input */
+  background: linear-gradient(135deg, #00FFCC, #00C9A7); /* Gradient to match header */
+  color: #003366; /* Dark blue text for contrast */
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for button */
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+#searchBtn i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+#searchBtn:hover {
+  background: linear-gradient(135deg, #00C9A7, #00FFCC); /* Inverted gradient for hover effect */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+}
+
+#searchInput::placeholder {
+  color: #00796B; /* Darker cyan placeholder text for readability */
+}
+
+
+/* User info dropdown styles */
+.user-info {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-logo {
+  height: 30px; /* Adjust as needed */
+  width: 30px; /* Adjust as needed */
+  border-radius: 50%; /* Makes the logo circular */
+}
+
+#username {
+  padding-right: 20px; /* Add some padding to the right */
+  padding-left: 10px;  /* Optional: Add padding to the left */
+  font-size: 17px;     /* Optional: Adjust font size */
+  color: #292828;
+ font-family:Georgia, 'Times New Roman', Times, serif
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  color: inherit; /* Ensure text color is inherited */
+}
+
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top:30px;
+  background-color: #fff; /* Light background color */
+  min-width: 180px; /* Slightly wider for a more spacious feel */
+  border-radius: 10px; /* Rounded corners for a smoother look */
+  border: 1px solid #e2e8f0; /* Subtle border */
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Softer shadow for depth */
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #2d3748; /* Darker gray for text color */
+  padding: 14px 18px; /* More padding for comfortable spacing */
+  text-decoration: none;
+  display: block;
+  font-weight: 500; /* Slightly bolder text */
+  border-bottom: 1px solid #e2e8f0; /* Divider between items */
+}
+
+.dropdown-content a:hover {
+  background-color: #edf2f7; /* Light hover color */
+  color: #1a202c; /* Darker text on hover */
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none; /* Remove the last border */
+}
+
+.user-info:hover .dropdown-content {
+  display: block;
+}
+
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+}
+
+.modal-content {
+  background-color: #ffffff;
+  margin: 5% auto; /* 5% from the top and centered */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 70%; /* Could be more or less, depending on screen size */
+  max-width: 600px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.close {
+  color: #ff5722; /* Vivid orange */
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #e64a19; /* Slightly darker shade for hover */
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Task box styles */
+.task-box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.task-box:hover {
+  transform: translateY(-5px); /* Move the task box up slightly */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2); /* Increase shadow on hover */
+}
+
+.task-box h3 {
+  margin-top: 0;
+}
+.task-box {
+  cursor: pointer;
+}
+
+/* Input field styles */
+.input-field {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: calc(100% - 22px);
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+/* Modal input field styles */
+#taskTitle {
+  background-color: #e8f5e9; /* Light green */
+}
+
+#taskDescription {
+  background-color: #e0f2f1; /* Light cyan */
+}
+
+#taskStatus, #taskDueDate, #taskPriority {
+  background-color: #ffecf7; /* Light pink */
+}
+
+/* Add Task button styles */
+button[type="submit"] {
+  background-color: #ff5722; /* Vivid orange */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Larger font size */
+}
+
+button[type="submit"]:hover {
+  background-color: #e64a19; /* Slightly darker shade for hover */
+}
+
+/* Tasks list and delete button styles */
+#tasksContainer {
+  margin-top: 20px;
+}
+
+button#deleteSelectedBtn {
+  background-color: #f44336; /* Red for delete */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px; /* Larger font size */
+}
+
+button#deleteSelectedBtn:hover {
+  background-color: #c62828; /* Slightly darker shade for hover */
+}
+
+
+
+
+
+
+
+.task-box {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.task-title {
+  margin-top: 0;
+  font-size: 1.6em;
+  color: #333;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif; /* Use a modern font family */
+}
+
+.task-buttons {
+  margin-top: 10px;
+}
+
+/* Base styles for the buttons */
+.edit-btn, .delete-btn {
+  font-size: 0.9em;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Edit button styles */
+.edit-btn {
+  background-color: rgb(62, 147, 226);
+  color: white;
+  border: none;
+  width: 120px; /* Slightly larger for better visual appeal */
+  padding: 10px 15px;
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Delete button styles */
+.delete-btn {
+  background-color: rgb(247, 79, 79);
+  color: white;
+  border: none;
+  width: 120px; /* Slightly larger for better visual appeal */
+  padding: 10px 15px;
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hover effects for both buttons */
+.edit-btn:hover  {
+  background-color: #117cc8; /* Slightly lighter blue for edit button on hover */
+  transform: translateY(-2px); /* Lift the button slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+.delete-btn:hover{
+  background-color: rgb(241, 30, 30); /* Slightly lighter blue for edit button on hover */
+  transform: translateY(-2px); /* Lift the button slightly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+/* Focus effect for accessibility */
+.edit-btn:focus, .delete-btn:focus {
+  outline: 3px solid #000; /* Add a visible focus outline */
+}
+
+
+
+
+
+#openModalBtn {
+  background: linear-gradient(135deg, #002147, #004d69, #007a8a, #006e6f); /* Darker gradient */
+  color: #FFFFFF; /* White text for contrast */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.1s ease, box-shadow 0.2s ease; /* Adjusted transition effects */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Slightly deeper shadow for depth */
+}
+
+.btn-logo {
+  width: 20px; /* Adjust as needed */
+  height: auto;
+  margin-right: 8px; /* Space between logo and text */
+}
+
+#openModalBtn:hover {
+  background: linear-gradient(135deg, #004d69, #007a8a, #006e6f, #002147); /* Darker gradient on hover */
+  transform: scale(1.02); /* Slightly smaller scale effect on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+}
+
+
+#tasksHeading {
+  text-align: center;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Styling for labels (e.g., Title, Description, etc.) */
+.label {
+  color: #181718; /* Green color for labels */
+  font-weight: bold;
+}
+
+
+/* Styling for user-provided values */
+.value {
+  color: #4d654e; /* Orange color for values */
+  
+}
+
+
+
+.filter-container {
+  display: flex;
+  align-items: center; /* Vertically center the label and dropdown */
+  margin-right: 20px; /* Add space to the right to avoid overlap */
+}
+
+.filter-container label {
+  margin-right: 10px; /* Space between label and dropdown */
+  font-size: 16px; /* Adjust font size for readability */
+  font-weight: bold; /* Make the font bold */
+  color: #003366; /* Dark blue color for consistency with header */
+}
+
+.filter-dropdown {
+  padding: 8px;
+  border: 1px solid #00C9A7; /* Light cyan border to match the header */
+  border-radius: 25px; /* Rounded corners for a modern look */
+  background-color: #fff; /* Light cyan background for freshness */
+  color: #003366; /* Dark blue text for contrast */
+  font-size: 16px; /* Consistent font size */
+  font-weight: bold; /* Bold text for improved visibility */
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Light shadow for depth */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+.filter-dropdown:focus {
+  border-color: #fff; /* Brighter cyan border on focus */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhanced shadow on focus */
+}
+
+
+
+
+
+

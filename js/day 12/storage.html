@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            padding: 16px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccc;
+            width: 400px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm">
+        <div class="container">
+            <label>Enter First Name :</label>
+            <input id="firstName" type="text" placeholder="Enter first name" required><br>
+            <label>Enter Last Name :</label>
+            <input id="lastName" type="text" placeholder="Enter last name" required><br>
+            <label>Enter Email :</label>
+            <input id="email" type="email" placeholder="Enter your email" required><br>
+            <label>Enter Mobile No :</label>
+            <input id="mobileNo" type="tel" placeholder="Enter mobile number" required><br>
+            <label>Enter Address :</label>
+            <input id="address" type="text" placeholder="Enter address" required><br>
+            <label>Enter Password :</label>
+            <input id="password" type="password" placeholder="Enter password" required><br>
+            <button type="button" onclick="saveUserDetails()">Save</button>
+        </div>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        const saveUserDetails = () => {
+            const userDetails = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                mobileNo: document.getElementById('mobileNo').value,
+                address: document.getElementById('address').value,
+                password: document.getElementById('password').value
+            };
+
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+            reprintUserDetails();
+        };
+
+        const reprintUserDetails = () => {
+            const storedDetails = localStorage.getItem('userDetails');
+            if (storedDetails) {
+                const userDetails = JSON.parse(storedDetails);
+                const output = document.getElementById('output');
+                output.innerHTML = `
+                    <p>First Name: ${userDetails.firstName}</p>
+                    <p>Last Name: ${userDetails.lastName}</p>
+                    <p>Email: ${userDetails.email}</p>
+                    <p>Mobile No: ${userDetails.mobileNo}</p>
+                    <p>Address: ${userDetails.address}</p>
+                    <p>Password: ${userDetails.password}</p>
+                `;
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            reprintUserDetails();
+        });
+    </script>
+</body>
+</html>

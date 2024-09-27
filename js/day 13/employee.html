@@ -1,0 +1,154 @@
+
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1 align="center">Employee Details</h1>
+    <div id="tableContainer"></div>
+
+    <script>
+        const employee = {
+            "Employees": [
+                {
+                    "userId": "krish",
+                    "jobTitle": "Developer",
+                    "firstName": "Krish",
+                    "lastName": "Lee",
+                    "employeeCode": "E1",
+                    "region": "CA",
+                    "phoneNumber": "123456",
+                    "emailAddress": "krish.lee@learningcontainer.com"
+                },
+                {
+                    "userId": "devid",
+                    "jobTitle": "Developer",
+                    "firstName": "Devid",
+                    "lastName": "Rome",
+                    "employeeCode": "E2",
+                    "region": "CA",
+                    "phoneNumber": "1111111",
+                    "emailAddress": "devid.rome@learningcontainer.com"
+                },
+                {
+                    "userId": "tin",
+                    "jobTitle": "Program Directory",
+                    "firstName": "tin",
+                    "lastName": "jonson",
+                    "employeeCode": "E3",
+                    "region": "CA",
+                    "phoneNumber": "2222222",
+                    "emailAddress": "tin.jonson@learningcontainer.com"
+                },
+                {
+                    "userId": "krish",
+                    "jobTitle": "Developer",
+                    "firstName": "Krish",
+                    "lastName": "Lee",
+                    "employeeCode": "E1",
+                    "region": "CA",
+                    "phoneNumber": "123456",
+                    "emailAddress": "krish.lee@learningcontainer.com"
+                },
+                {
+                    "userId": "devid",
+                    "jobTitle": "Developer",
+                    "firstName": "Devid",
+                    "lastName": "Rome",
+                    "employeeCode": "E2",
+                    "region": "CA",
+                    "phoneNumber": "1111111",
+                    "emailAddress": "devid.rome@learningcontainer.com"
+                },
+                {
+                    "userId": "tin",
+                    "jobTitle": "Program Directory",
+                    "firstName": "tin",
+                    "lastName": "jonson",
+                    "employeeCode": "E3",
+                    "region": "CA",
+                    "phoneNumber": "2222222",
+                    "emailAddress": "tin.jonson@learningcontainer.com"
+                }
+            ]
+        };
+
+        function createTable(data) {
+            return new Promise((resolve, reject) => {
+                if (!data || data.length === 0) {
+                    reject('No data available');
+                } else {
+                    let table = `<table>
+                                    <tr>
+                                        <th>UserId</th>
+                                        <th>Job Title</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Employee Code</th>
+                                        <th>Region</th>
+                                        <th>Phone Number</th>
+                                        <th>Email Address</th>
+                                    </tr>`;
+
+                    data.forEach(emp => {
+                        table += `<tr>
+                                    <td>${emp.userId}</td>
+                                    <td>${emp.jobTitle}</td>
+                                    <td>${emp.firstName}</td>
+                                    <td>${emp.lastName}</td>
+                                    <td>${emp.employeeCode}</td>
+                                    <td>${emp.region}</td>
+                                    <td>${emp.phoneNumber}</td>
+                                    <td>${emp.emailAddress}</td>
+                                  </tr>`;
+                    });
+
+                    table += `</table>`;
+                    resolve(table);
+                }
+            });
+        }
+
+       
+        function displayTable(tableHTML) {
+            document.getElementById('tableContainer').innerHTML = tableHTML;
+        }
+
+        
+        function main(callback) {
+            createTable(employee.Employees)
+                .then(table => {
+                    callback(null, table);
+                })
+                .catch(error => {
+                    callback(error, null);
+                });
+        }
+
+        
+        main((error, table) => {
+            if (error) {
+                console.error('Error:', error);
+                document.getElementById('tableContainer').innerHTML = 'Error loading data.';
+            } else {
+                displayTable(table);
+            }
+        });
+    </script>
+</body>
+</html>

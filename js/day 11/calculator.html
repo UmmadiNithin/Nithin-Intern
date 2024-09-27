@@ -1,0 +1,76 @@
+<html>
+    <style>
+      
+
+        #registrationForm {
+            border: 1px solid #000;
+            padding: 20px;
+            width: 300px;
+            height: 450px;
+            margin: 20px auto;
+        }
+
+        .button {
+            font-size: 50px;
+            background-color: rgb(169, 248, 59);
+            border-radius: 8px;
+            cursor: pointer;
+            padding: 17px 39px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+        }
+
+        #display {
+            height: 50px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <form id="registrationForm" >
+        <div style="display: flex;">
+            <input type="text" id="display" placeholder="calculate your numbers" disabled><br><br>
+        </div>
+        <div class="buttons">
+            <button type="button" class="button" onclick="appendToDisplay('1')">1</button>
+            <button type="button" class="button" onclick="appendToDisplay('2')">2</button>
+            <button type="button" class="button" onclick="appendToDisplay('3')">3</button>
+            <button type="button" class="button" onclick="appendToDisplay('4')">4</button>
+            <button type="button" class="button" onclick="appendToDisplay('5')">5</button>
+            <button type="button" class="button" onclick="appendToDisplay('6')">6</button>
+            <button type="button" class="button" onclick="appendToDisplay('7')">7</button>
+            <button type="button" class="button" onclick="appendToDisplay('8')">8</button>
+            <button type="button" class="button" onclick="appendToDisplay('9')">9</button>
+            <button type="button" class="button" onclick="appendToDisplay('0')">0</button>
+            <button type="button" class="button" onclick="appendToDisplay('+')">+</button>
+            <button type="button" class="button" onclick="appendToDisplay('-')">-</button>
+            <button type="button" class="button" onclick="appendToDisplay('*')">*</button>
+            <button type="button" class="button" onclick="appendToDisplay('/')">/</button>
+            <button type="button" class="button" onclick="clearDisplay()">C</button>
+            <button type="button" class="button" style="width: 300px;" onclick="calculateResult()">=</button>
+        </div>
+    </form>
+    <script>
+        const display = document.getElementById('display');
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+
+<html lang="en">
+<head>
+   
+    <script>
+        
+        var digits = [2356, 1212, 8967, 4563, 2345];
+
+        function sumArray(arr) {
+            return arr.reduce((acc, curr) => acc + curr, 0);
+        }
+
+    
+        function subtractArray(arr) {
+            return arr.reduce((acc, curr) => acc - curr);
+        }
+
+    
+        function multiplyArray(arr) {
+            return arr.reduce((acc, curr) => acc * curr, 1);
+        }
+
+        
+        function displayResults() {
+            var sum = sumArray(digits);
+            var difference = subtractArray(digits);
+            var product = multiplyArray(digits);
+
+            document.getElementById("sumResult").textContent = sum;
+            document.getElementById("subtractResult").textContent = difference;
+            document.getElementById("multiplyResult").textContent = product;
+        }
+    </script>
+</head>
+<body onload="displayResults()">
+    <h1>Array Operations</h1>
+    <h2>Sample array: [2356, 1212, 8967, 4563, 2345]</h2>
+    <p>Sum: <span id="sumResult"></span></p>
+    <p>Subtraction: <span id="subtractResult"></span></p>
+    <p>Multiplication: <span id="multiplyResult"></span></p>
+</body>
+</html>

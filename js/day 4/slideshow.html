@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+    <title>Simple Slideshow</title>
+    <style>
+        #slideshow {
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+    <script>
+        let currentImageIndex = 0;
+
+        function changeImage() {
+            const images = [
+            'https://buffer.com/library/content/images/size/w1200/2023/10/free-images.jpg ' ,            
+            'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg ', 
+             'https://img.freepik.com/free-photo/abstract-autumn-beauty-multi-colored-leaf-vein-pattern-generated-by-ai_188544-9871.jpg',
+           'https://images.unsplash.com/reserve/bOvf94dPRxWu0u3QsPjF_tree.jpg?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8bmF0dXJhbHxlbnwwfHx8fDE3MjAwMjk1Mjh8MA&ixlib=rb-4.0.3'
+            ];
+            currentImageIndex++;
+            if(currentImageIndex >= images.length)  {
+            currentImageIndex=0;
+            }
+            
+            document.getElementById('slideshow').src = images[currentImageIndex];
+        }
+    </script>
+</head>
+<body>
+    <img id="slideshow" src="https://via.placeholder.com/500x300?text=Image+1" alt="Slideshow Image" onclick="changeImage()">
+</body>
+</html>
+

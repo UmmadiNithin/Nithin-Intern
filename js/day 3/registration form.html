@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #registrationForm {
+            border: 1px solid #000;
+            padding: 20px;
+            width: 400px;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 50%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <form id="registrationForm">  
+        <h2 align="center">Registration Form</h2>
+        <div style="display: flex;">
+            <label for="firstName">First Name:</label><br>
+            <input type="text" id="firstName" name="firstName" style="height: 20px;" required><br><br>
+        </div>
+        <div style="display: flex;">
+            <label for="lastName">Last Name:</label><br>
+            <input type="text" id="lastName" name="lastName" style="height: 20px;"><br><br>
+        </div>
+        <div style="display: flex;">
+            <label for="username">User Name:</label><br>
+            <input type="text" id="username" name="username" style="height: 20px;" required><br><br>
+        </div>
+
+        <div style="display: flex;">
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" style="height: 20px;" required><br><br>
+        </div>
+
+        <div style="display: flex;">
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" style="height: 20px;" required><br><br>
+        </div>
+
+        <div style="display: flex;">
+            <label for="confirmPassword">Confirm Password:</label><br>
+            <input type="password" id="confirmPassword" name="confirmPassword" style="height: 20px;" required><br><br>
+        </div>
+
+        <button type="button" onclick="registerUser()">Register</button>
+    </form>
+
+
+    <div id="confirmation"></div>
+    <div id="userData"></div>
+
+    <script>
+        function registerUser() {
+            const form = document.getElementById('registrationForm');
+            const firstName = form.firstName.value;
+            const lastName = form.lastName.value;
+            const username = form.username.value;
+            const email = form.email.value;
+            const password = form.password.value;
+            const confirmPassword = form.confirmPassword.value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            const confirmation = confirm('Are you sure you want to submit?');
+
+            if (confirmation) {
+                const table = `
+                    <table>
+                        <tr><th>Field</th><th>Value</th></tr>
+                        <tr><td>First Name</td><td>${firstName}</td></tr>
+                        <tr><td>Last Name</td><td>${lastName}</td></tr>
+                        <tr><td>User Name</td><td>${username}</td></tr>
+                        <tr><td>Email</td><td>${email}</td></tr>
+                    </table>
+                `;
+
+                document.getElementById('userData').innerHTML = table;
+            }
+        }
+    </script>
+</body>
+
+</html>

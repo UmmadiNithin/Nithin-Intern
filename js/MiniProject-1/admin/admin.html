@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+</head>
+
+<body>
+    <section id="header">
+        <a href="#"><img src="/MiniProject-1/images/nithin.png" class="logo" alt="" style="height: 60px; width: 70px; margin-right: 100; margin-bottom: 30;"></a>
+
+        <div>
+            <ul id="navbar">
+                <li><a href="/MiniProject-1/userdash.html">Home</a></li>
+
+                <li id="search-bar">
+                    <form id="search-form" action="#" method="get">
+                        <input type="text" id="search-name" name="search" placeholder="Search...">
+                        <button type="submit"><i class="fa-solid fa-search"></i></button>
+                    </form>
+                </li>
+                <li id="lg-bag"><a href="/MiniProject-1/addtocart.html"><i class="fa-solid fa-bag-shopping"></i></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn"><i class="fa-solid fa-user" style="color: black;"></i></a>
+                    <div class="dropdown-content">
+                        <a href="/MiniProject-1/login.html" id="login-link">Login</a>
+                        <a href="/MiniProject-1/signup.html" id="signup-link">Signup</a>
+                        <h3 id="user-email" style="display: none;"></h3>
+                        <a href="/MiniProject-1/template.html" id="logout-link" style="display: none;">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <div class="AdminContainer">
+        <div class="form-container">
+            <h1>Admin</h1>
+
+            <form id="Admin-Form">
+                <div class="input-group">
+                    <input type="hidden" id="productId">
+                    <label for="product-image">Product Image</label>
+                    <input type="file" id="product-image" accept="image/png, image/jpeg" class="fileinput" onchange="getFile(event)" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Product-Name">Product Name</label>
+                    <input type="text" id="Product-Name" placeholder="Enter product name " required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Product-Description">Product Description</label>
+                    <input type="text" id="Product-Description" placeholder="Enter product description" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="Product-Price">Product Price</label>
+                    <input type="text" id="Product-Price" placeholder="Enter product price" required>
+                </div>
+
+                <button type="submit" id="AddItem">Add Item</button>
+            </form><br>
+        </div>
+
+        <div class="DymaniContainer">
+            <div id="product-container"></div>
+        </div>
+    </div>
+
+    <script defer type="module" src="admin.js"></script>
+
+</body>
+</html>

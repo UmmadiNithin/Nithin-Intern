@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <h1>printing area of rectangle1 &rectangle2 </h1>
+        <p>please go and check in console !</p>
+    </body>
+    <script>
+        class rectangle {
+            constructor(s1,s2,s3,s4){
+                this.side1=s1,
+                this.side2=s2,
+                this.side3=s3,
+                this.side4=s4
+            }
+            area(){
+                console.log("the area of rectangle1 is:"+(this.side1*this.side2))
+                console.log("the area of rectangle2 is:"+(this.side3*this.side4))
+            }
+
+        }
+        let obj=new rectangle(4,5,5,8)
+        obj.area()
+    </script>
+</html>

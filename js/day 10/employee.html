@@ -1,0 +1,45 @@
+<html>
+    <h1>please go and check in the console !</h1>
+<script>
+
+    class Employee {
+    constructor() {
+      this.salary = 0;
+      this.hoursPerDay = 0;
+    }
+  
+    getInfo(salary, hoursPerDay) {
+      this.salary = salary;
+      this.hoursPerDay = hoursPerDay;
+    }
+  
+    addSal() {
+      if (this.salary < 500) {
+        const amounttoadd1=10 * 74.5;
+        this.salary += amounttoadd1
+      }
+    }
+  
+    addWork() {
+      if (this.hoursPerDay > 6) {
+        
+        const amounttoadd2=5 * 74.5;
+        this.salary += amounttoadd2
+      }
+    }
+  
+    finalSalary() {
+      console.log("the final salary is :" +(this.salary)+ " " +"rupees");
+    }
+  }
+  
+  
+  const employee = new Employee();
+  employee.getInfo(400, 7);  
+  employee.addSal();        
+  employee.addWork();        
+  employee.finalSalary();    
+
+</script>
+
+  </html>

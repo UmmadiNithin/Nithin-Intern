@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <form>
+        <input type="text" placeholder="enter number1" id="num1"><br>
+        <input type="text" placeholder="enter number2" id="num2"><br>
+        <button type="button" onclick="nithin()">Result</button>
+    </form>
+
+    <div style="background-color: yellowgreen;"  id="output"></div>
+
+    <script>
+        const nithin = () => {
+            const num1 = document.getElementById('num1').value;
+            const num2 = document.getElementById('num2').value;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                alert("Please enter digits!");
+            }
+
+
+
+
+            const multiplicationResult = num1 * num2
+            const divisionResult = num1 / num2
+            const moduloResult = num1 % num2
+
+
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                <p>Multiplication: ${multiplicationResult}</p>
+                <p>Division: ${divisionResult}</p>
+                <p>Modulo: ${moduloResult}</p>
+            `
+        };
+    </script>
+</body>
+
+</html>

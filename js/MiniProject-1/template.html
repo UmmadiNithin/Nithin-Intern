@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>template</title>
+    <link rel="stylesheet" href="template.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="login-btn" id="login-btn">Login</a>
+        </div>
+    </header>
+
+    <div class="background-container">
+        <div class="content">
+            <button class="show-now-btn" id="show-now-btn">SHOP NOW</button>
+        </div>
+    </div>
+
+<script>
+document.getElementById('login-btn').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = '/MiniProject-1/login.html'; 
+});
+
+document.getElementById('show-now-btn').addEventListener('click', function(event) {
+    event.preventDefault();
+    window.location.href = '/MiniProject-1/userdash.html'; 
+});
+
+</script>
+</body>
+</html>
+

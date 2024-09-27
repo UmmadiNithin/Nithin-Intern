@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <link rel="stylesheet" href="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/homestyles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap">
+</head>
+<body>
+
+  <header id="header">
+    <div class="header-container">
+      <div class="logo">
+        <img src="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/images/monochrome_large.png" alt="Logo"> 
+        <h1 class="header-title">TODO LIST</h1> 
+      </div>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search tasks...">
+        <button id="searchBtn">
+          <i class="fas fa-search"></i> Search
+        </button>
+      </div>
+      <div class="filter-container">
+        <label for="priorityFilter">Filter by Priority:</label>
+        <select id="priorityFilter" class="filter-dropdown">
+          <option value="">All</option>
+          <option value="HIGH">High</option>
+          <option value="LOW">Low</option>
+          <option value="MEDIUM">Medium</option>
+        </select>
+      </div>
+      <div class="user-info">
+        <div class="profile-container">
+          <img src="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/images/5700c04197ee9a4372a35ef16eb78f4e-removebg-preview.png" alt="Profile Logo" class="profile-logo">
+          <span id="username">Username</span>
+        </div>
+        <div id="userDropdown" class="dropdown">
+          <div class="dropdown-content">
+            <a href="#" id="logoutBtn">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <button id="openModalBtn">
+      <img src="/Nithin-Intern/Node/mini-project/todo-list-app/frontend/images/images__1_-removebg-preview.png" alt="Logo" class="btn-logo" />
+      Add Task
+    </button>
+  <!-- Modal -->
+<div id="taskModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Add/Edit Task</h2>
+    <form id="taskForm">
+      <input type="hidden" id="taskId"> <!-- Hidden field for task ID -->
+
+      <label for="taskTitle">Title :</label>
+      <input type="text" id="taskTitle" placeholder="Title" class="input-field" required>
+
+      <label for="taskDescription">Description :</label>
+      <textarea id="taskDescription" placeholder="Description" class="input-field" rows="4" required></textarea>
+
+      <div class="modal-row">
+        <div class="modal-column">
+          <label for="taskStatus">Status :</label>
+          <select id="taskStatus" class="input-field" required>
+            <option value="TODO">To Do</option>
+            <option value="IN_PROGRESS">In Progress</option>
+            <option value="DONE">Done</option>
+          </select>
+        </div>
+
+        <div class="modal-column">
+          <label for="taskDueDate">Due Date :</label>
+          <input type="date" id="taskDueDate" class="input-field" required>
+        </div>
+
+        <div class="modal-column">
+          <label for="taskPriority">Priority :</label>
+          <select id="taskPriority" class="input-field" required>
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" id="saveTaskBtn">Save Task</button>
+    </form>
+  </div>
+</div>
+
+
+    <h2 id="tasksHeading">TASKS LIST</h2>
+    <div id="tasksContainer" class="tasks-container">
+      <!-- Tasks will be dynamically added here -->
+    </div>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      background: linear-gradient(to right, #111111, #f6ca2d); /* Gradient background */
+
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 60%;
+      padding: 30px;
+    }
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      background-color: #ebebeb;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      width: 100%;
+    }
+    .form-container h1 {
+      margin-bottom: 1.5rem;
+      color: #343a40;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .form-control {
+      border-radius: 0.5rem;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+      border-radius: 0.5rem;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #004085;
+    }
+    .modal-content {
+      border-radius: 0.75rem;
+    }
+    .modal-header {
+      border-bottom: none;
+    }
+    .modal-footer {
+      border-top: none;
+    }
+    .text-center a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    .text-center a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <h1 class="text-center">Register</h1>
+      <form id="registrationForm" class="needs-validation" novalidate>
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" name="username" id="username" required>
+          <div class="invalid-feedback">Please enter a username.</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" id="password" required>
+          <div class="invalid-feedback">Please enter a password.</div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" name="email" id="email" required>
+          <div class="invalid-feedback">Please enter a valid email address.</div>
+        </div>
+        <div class="form-group">
+          <label for="phone_no">Phone Number</label>
+          <input type="text" class="form-control" name="phone_no" id="phone_no">
+        </div>
+        <div class="form-group">
+          <label for="address">Address</label>
+          <textarea class="form-control" name="address" id="address"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="department">Department</label>
+            <input type="text" class="form-control" name="department" id="department">
+          </div>
+          <div class="form-group">
+            <label for="institution">Institution</label>
+            <input type="text" class="form-control" name="institution" id="institution">
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <div class="text-center mt-3">
+          <a href="/auth/login">Already have an account? Login</a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="errorModalLabel">Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="errorMessage">
+            <!-- Error message will be inserted here -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document.querySelector('#registrationForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const form = event.target;
+        if (!form.checkValidity()) {
+          event.stopPropagation();
+          form.classList.add('was-validated');
+          return;
+        }
+
+        const username = document.querySelector('input[name="username"]').value;
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        try {
+          // Check if username already exists
+          const usernameResponse = await fetch(`/auth/check-username?username=${encodeURIComponent(username)}`);
+          const usernameData = await usernameResponse.json();
+
+          if (usernameData.exists) {
+            showError('Username is already taken. Please choose another.');
+            return;
+          }
+
+          // Register the user
+          const registerResponse = await fetch('/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+
+          const result = await registerResponse.json();
+
+          if (registerResponse.ok) {
+            // Redirect to login page after successful registration
+            window.location.href = '/auth/login';
+          } else {
+            // Handle server-side validation errors
+            if (result.errors) {
+              let errorMessage = '';
+              for (const [field, messages] of Object.entries(result.errors)) {
+                errorMessage += `${field.charAt(0).toUpperCase() + field.slice(1)}: ${messages.join(', ')}\n`;
+              }
+              showError(errorMessage.trim());
+            } else {
+              showError(result.error || 'An error occurred. Please try again.');
+            }
+          }
+        } catch (error) {
+          showError('Network error. Please try again later.');
+        }
+      });
+
+      function showError(message) {
+        document.getElementById('errorMessage').innerText = message;
+        $('#errorModal').modal('show');
+      }
+    </script>
+</body>
+</html>
